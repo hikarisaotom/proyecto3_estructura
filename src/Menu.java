@@ -23,8 +23,11 @@ import org.graphstream.ui.view.Viewer;
 import org.graphstream.ui.view.View;
 /**/
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.*;
 import javax.swing.border.*;
+import org.graphstream.algorithm.Dijkstra;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
 import org.graphstream.ui.swingViewer.*;
@@ -103,13 +106,14 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jd_GraphLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jc_there, 0, 185, Short.MAX_VALUE)))
-                    .addGroup(jd_GraphLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_GraphLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jc_there, 0, 185, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -123,10 +127,10 @@ public class Menu extends javax.swing.JFrame {
                         .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jc_here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jc_there, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(23, 23, 23)
+                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jc_there, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -164,9 +168,8 @@ public class Menu extends javax.swing.JFrame {
         starGraph();
         display();
         jd_Graph.pack();
-        jd_Graph.setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds()); 
+        jd_Graph.setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
         jd_Graph.show(true);
-      
 
 
     }//GEN-LAST:event_jButton1MouseClicked
@@ -176,21 +179,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jc_hereActionPerformed
 
     private void jc_hereItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_hereItemStateChanged
-        for (Node node : graph) {//Agrega las etiquetas
-            node.setAttribute("ui.class", "marked_defult");
-        }
-        graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
-        graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
-
+        Dikstra(jc_here.getSelectedItem().toString(), jc_there.getSelectedItem().toString());
     }//GEN-LAST:event_jc_hereItemStateChanged
 
     private void jc_thereItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_thereItemStateChanged
-        for (Node node : graph) {//Agrega las etiquetas
-            node.setAttribute("ui.class", "marked_defult");
-        }
-        graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
-        graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
-
+        Dikstra(jc_here.getSelectedItem().toString(), jc_there.getSelectedItem().toString());
     }//GEN-LAST:event_jc_thereItemStateChanged
 
     /**
@@ -222,16 +215,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
     }
-    protected String styleSheet
-            = "node {"
-            + "	fill-color: blue;"
-            + "}"
-            + "node.marked {"
-            + "	fill-color: red;"
-            + "}"
-            + "node.marked_defult {"
-            + "	fill-color: blue;"
-            + "}";
 
     public void starGraph() {
 
@@ -262,7 +245,7 @@ public class Menu extends javax.swing.JFrame {
         viewer.enableAutoLayout();
         ViewPanel viewPanel = viewer.addDefaultView(false);
         panel.add(viewPanel);
-        
+
         jd_Graph.add(panel);
         frame.add(panel);
         frame.pack();
@@ -294,16 +277,14 @@ public class Menu extends javax.swing.JFrame {
             try {
                 sc = new Scanner(toCreate);
                 while (sc.hasNext()) {
+
                     String data[] = sc.next().split(",");
                     for (int i = 0; i < 3; i++) {//el largo deberia ser 3                         
-                        if (i != 2) {
-                            if (!(graph.getNode(data[i]) != null)) {
-                                Node node = graph.addNode(data[i]);
+                        if (i == 2) {
 
-                            }
-                        } else {
                             if (!(graph.getEdge(data[2]) != null)) {
-                                graph.addEdge(data[2], data[0], data[1]);
+                                Random ran = new Random();
+                                graph.addEdge(data[2], data[0], data[1]).addAttribute("length", ran.nextInt(15) + 1);
                             }
                         }
                     }
@@ -314,16 +295,59 @@ public class Menu extends javax.swing.JFrame {
         }//Fin del if 
         for (Node node : graph) {//Agrega las etiquetas
             node.addAttribute("ui.label", node.getId());
-        }
 
+        }
+         for (Edge edge : graph.getEachEdge()) {
+            edge.addAttribute("ui.label", (Object) edge.getAttribute("length"));
+        }
         return graph;
     }
 
-    public void Dikstra() {
+    public void Dikstra(String from, String to) {
+        Dijkstra dijkstra = new Dijkstra(Dijkstra.Element.EDGE, "result", "length");
+        dijkstra.init(graph);
+        dijkstra.setSource(graph.getNode(from));
+        dijkstra.compute();
+        /*Seteamos los colores a azul nuevamente*/
+        for (Node node : graph) {
+            node.setAttribute("ui.class", "marked_defult");
+            node.getEdge(0).addAttribute("ui.style", "fill-color: black;");
+        }
+        /*coloreamos los nodos que sirvan como conexion*/
+           ArrayList <Node> vertex = new ArrayList<Node>();
+        for (Node node : dijkstra.getPathNodes(graph.getNode(to))) {
+            node.addAttribute("ui.class", "marked_visited");
+           
+             vertex.add(0, node);
+        }
+        for(int i=0;i<vertex.size();i++){
+            if(i!=vertex.size()-1){
+                vertex.get(i).getEdgeBetween( vertex.get(i+1)).addAttribute("ui.style", "fill-color: red;");
+            }
+        }
+      
 
+    
+        
+       
+        graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
+        graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
     }
 
     Graph graph;
+    protected String styleSheet
+            = "node {"
+            + "	fill-color: blue;"
+            + "}"
+            + "node.marked {"
+            + "	fill-color: green;"
+            + "}"
+            + "node.marked_defult {"
+            + "	fill-color: blue;"
+            + "}"
+             + "node.marked_visited{"
+            + "	fill-color: yellow;"
+            + "}";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
