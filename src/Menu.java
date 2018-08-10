@@ -60,7 +60,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_time = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jd_CreateNewRute = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -100,22 +104,24 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jp_show.setBackground(new java.awt.Color(0, 0, 0));
         jp_show.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jp_show.setPreferredSize(new java.awt.Dimension(800, 750));
 
         javax.swing.GroupLayout jp_showLayout = new javax.swing.GroupLayout(jp_show);
         jp_show.setLayout(jp_showLayout);
         jp_showLayout.setHorizontalGroup(
             jp_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 693, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         jp_showLayout.setVerticalGroup(
             jp_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
+            .addGap(0, 750, Short.MAX_VALUE)
         );
 
         jLabel3.setText("tiempo estimado:");
 
-        lbl_time.setText("jLabel4");
+        lbl_time.setText("N/A");
 
         jButton2.setText("Iniciar Recorrido");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -124,12 +130,31 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Crear Nueva Ruta");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+        jMenu2.setText("Archivo");
+
+        jMenuItem1.setText("Abrir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
             }
         });
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Edit");
+
+        jMenuItem2.setText("Crear Ruta");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu3);
+
+        jd_Graph.setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout jd_GraphLayout = new javax.swing.GroupLayout(jd_Graph.getContentPane());
         jd_Graph.getContentPane().setLayout(jd_GraphLayout);
@@ -145,20 +170,18 @@ public class Menu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3))
-                        .addGap(12, 12, 12)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
                 .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jc_there, 0, 185, Short.MAX_VALUE)
-                        .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jc_there, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2)
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jd_GraphLayout.setVerticalGroup(
             jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,11 +201,9 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_time))
                         .addGap(39, 39, 39)
-                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton2)))
+                        .addComponent(jButton2))
                     .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(461, Short.MAX_VALUE))
         );
 
         jLabel4.setText("Desde");
@@ -305,6 +326,11 @@ public class Menu extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -327,8 +353,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        starGraph();
-        display();
+
         jd_Graph.pack();
         jd_Graph.setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
         jd_Graph.show(true);
@@ -342,10 +367,14 @@ public class Menu extends javax.swing.JFrame {
 
     private void jc_hereItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_hereItemStateChanged
         SetDefault();
+         graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
+        graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
     }//GEN-LAST:event_jc_hereItemStateChanged
 
     private void jc_thereItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_thereItemStateChanged
         SetDefault();
+         graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
+        graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
     }//GEN-LAST:event_jc_thereItemStateChanged
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -355,12 +384,6 @@ public class Menu extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        jd_CreateNewRute.show();
-        jd_CreateNewRute.pack();
-        jd_CreateNewRute.setLocationRelativeTo(jd_Graph);
-    }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         if (graph.getNode(jc_newhere.getSelectedItem().toString()) != null && graph.getNode(jc_newhere.getSelectedItem().toString()) != null) {
@@ -378,6 +401,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         graph.addNode(txt_newnode.getText());
+        graph.getNode(txt_newnode.getText()).setAttribute("estate", false);
         LoadCombo();
         SetDefault();
         txt_newnode.setText("");
@@ -387,6 +411,22 @@ public class Menu extends javax.swing.JFrame {
     private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4MouseEntered
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        jp_show.removeAll();
+        starGraph();
+        display();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        jd_CreateNewRute.show();
+        jd_CreateNewRute.pack();
+        jd_CreateNewRute.setLocationRelativeTo(jd_Graph);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -420,8 +460,12 @@ public class Menu extends javax.swing.JFrame {
     public void starGraph() {
         graph = CreateGraph(ReadFile());
         LoadCombo();
+        GenerateCrash();
         SetDefault();
+
         graph.addAttribute("ui.stylesheet", styleSheet);
+
+        jp_show.repaint();
 
     }
 
@@ -431,7 +475,7 @@ public class Menu extends javax.swing.JFrame {
         JPanel panel = new JPanel(new GridLayout()) {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(600, 600);
+                return new Dimension(800, 650);
             }
         };
         panel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
@@ -439,10 +483,10 @@ public class Menu extends javax.swing.JFrame {
         viewer.enableAutoLayout();
         ViewPanel viewPanel = viewer.addDefaultView(false);
         panel.add(viewPanel);
-        jd_Graph.add(panel);
         frame.add(panel);
         frame.pack();
-        jp_show.add(panel, BorderLayout.CENTER);
+        jp_show.add(viewPanel);
+
     }
 
     public File ReadFile() {
@@ -493,6 +537,8 @@ public class Menu extends javax.swing.JFrame {
                             if (!(graph.getEdge(data[2]) != null)) {
                                 Random ran = new Random();
                                 graph.addEdge(data[2], data[0], data[1]).addAttribute("length", ran.nextInt(15) + 1);
+                                graph.getNode(data[0]).setAttribute("estate", false);
+                                graph.getNode(data[1]).setAttribute("estate", false);
                             }
                         }
                     }
@@ -506,35 +552,33 @@ public class Menu extends javax.swing.JFrame {
     }
 
     public void GenerateCrash() {
-        Random ranCrash= new Random();
+        Random ranCrash = new Random();
         Random ranLucky = new Random();
-        int lucky=ranLucky.nextInt(6)+1;
-        System.out.println("YOUR LUCKY TODAY: "+lucky);
-        for(int i=0;i<lucky;i++){
-             int crash = ranCrash.nextInt(graph.getEdgeCount()-1);
+        int lucky = ranLucky.nextInt(6) + 1;
+
+        for (int i = 0; i < lucky; i++) {
+            int crash = ranCrash.nextInt(graph.getEdgeCount() - 1);
             graph.getNode(crash).setAttribute("ui.class", "marked_closed");
+            graph.getNode(crash).setAttribute("estate", true);
+
         }
     }
 
     public void Dikstra(String from, String to) {
+        Graph graph1 = graph;
         Dijkstra dijkstra = new Dijkstra(Dijkstra.Element.EDGE, "result", "length");
-        dijkstra.init(graph);
-        dijkstra.setSource(graph.getNode(from));
+        dijkstra.init(graph1);
+        dijkstra.setSource(graph1.getNode(from));
         dijkstra.compute();
-        /*Seteamos los colores a azul nuevamente*/
-        for (Node node : graph) {
-            node.setAttribute("ui.class", "marked_defult");
-            // node.getEdge(0).addAttribute("ui.style", "fill-color: black;");
-        }
-        /*coloreamos los nodos que sirvan como conexion*/
-
+        SetDefault();
         ArrayList<Node> vertex = new ArrayList<Node>();
         int timeTotal = 0;
-        for (Node node : dijkstra.getPathNodes(graph.getNode(to))) {
+        for (Node node : dijkstra.getPathNodes(graph1.getNode(to))) {
             node.addAttribute("ui.class", "marked_visited");
+
             vertex.add(0, node);
         }
-        GenerateCrash();
+
         for (int i = 0; i < vertex.size(); i++) {
             if (i != vertex.size() - 1) {
                 timeTotal += (int) vertex.get(i).getEdgeBetween(vertex.get(i + 1)).getAttribute("length");
@@ -545,20 +589,27 @@ public class Menu extends javax.swing.JFrame {
         hilo1.start();
         graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
         graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
+
     }
 
     void SetDefault() {
+         for (Node node : graph) {
+            if (!((boolean) node.getAttribute("estate"))) {
+                node.setAttribute("ui.class", "marked_defult");
+            }
+        }
+         for (Edge edge : graph.getEachEdge()) {
+            edge.addAttribute("ui.style", "fill-color: black;");
+        }
         for (Node node : graph) {//Agrega las etiquetas
             node.addAttribute("ui.label", node.getId());
-
         }
         for (Edge edge : graph.getEachEdge()) {
             edge.addAttribute("ui.label", (Object) edge.getAttribute("length"));
         }
-        GenerateCrash();
+
     }
     Graph graph;
-
     protected String styleSheet
             = "node {"
             + "	fill-color: blue;"
@@ -580,11 +631,14 @@ public class Menu extends javax.swing.JFrame {
             + "node.marked_closed{"
             + "	fill-color: red;"
             + "text-size: 10px;"
+            + "}"
+            + "graph {\n"
+            + " fill-color: gray;\n"
+            + "  fill-mode: plain;"
             + "}";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -593,6 +647,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
