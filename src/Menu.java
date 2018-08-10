@@ -57,6 +57,9 @@ public class Menu extends javax.swing.JFrame {
         jc_here = new javax.swing.JComboBox<>();
         jc_there = new javax.swing.JComboBox<>();
         jp_show = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        lbl_time = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         jd_Graph.setTitle("Rutas");
@@ -97,6 +100,17 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 593, Short.MAX_VALUE)
         );
 
+        jLabel3.setText("tiempo estimado:");
+
+        lbl_time.setText("jLabel4");
+
+        jButton2.setText("Iniciar Recorrido");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_GraphLayout = new javax.swing.GroupLayout(jd_Graph.getContentPane());
         jd_Graph.getContentPane().setLayout(jd_GraphLayout);
         jd_GraphLayout.setHorizontalGroup(
@@ -104,16 +118,24 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jd_GraphLayout.createSequentialGroup()
                 .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_GraphLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jc_there, 0, 185, Short.MAX_VALUE))
+                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jd_GraphLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_GraphLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)))
+                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jc_there, 0, 185, Short.MAX_VALUE)
+                            .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jd_GraphLayout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jButton2)))
                 .addGap(18, 18, 18)
                 .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -130,7 +152,13 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jc_there, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_time))
+                        .addGap(43, 43, 43)
+                        .addComponent(jButton2))
                     .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -179,12 +207,16 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jc_hereActionPerformed
 
     private void jc_hereItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_hereItemStateChanged
-        Dikstra(jc_here.getSelectedItem().toString(), jc_there.getSelectedItem().toString());
+        SetDefault();
     }//GEN-LAST:event_jc_hereItemStateChanged
 
     private void jc_thereItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_thereItemStateChanged
-        Dikstra(jc_here.getSelectedItem().toString(), jc_there.getSelectedItem().toString());
+      SetDefault();
     }//GEN-LAST:event_jc_thereItemStateChanged
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        Dikstra(jc_here.getSelectedItem().toString(), jc_there.getSelectedItem().toString());
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -227,6 +259,7 @@ public class Menu extends javax.swing.JFrame {
         }
         jc_here.setModel(modelHere);
         jc_there.setModel(modelThere);
+         SetDefault();
         graph.addAttribute("ui.stylesheet", styleSheet);
 
     }
@@ -293,13 +326,7 @@ public class Menu extends javax.swing.JFrame {
             }
             sc.close();
         }//Fin del if 
-        for (Node node : graph) {//Agrega las etiquetas
-            node.addAttribute("ui.label", node.getId());
-
-        }
-         for (Edge edge : graph.getEachEdge()) {
-            edge.addAttribute("ui.label", (Object) edge.getAttribute("length"));
-        }
+       
         return graph;
     }
 
@@ -314,47 +341,64 @@ public class Menu extends javax.swing.JFrame {
             node.getEdge(0).addAttribute("ui.style", "fill-color: black;");
         }
         /*coloreamos los nodos que sirvan como conexion*/
-           ArrayList <Node> vertex = new ArrayList<Node>();
+        ArrayList<Node> vertex = new ArrayList<Node>();
+        int timeTotal = 0;
         for (Node node : dijkstra.getPathNodes(graph.getNode(to))) {
             node.addAttribute("ui.class", "marked_visited");
-           
-             vertex.add(0, node);
+            vertex.add(0, node);
         }
-        for(int i=0;i<vertex.size();i++){
-            if(i!=vertex.size()-1){
-                vertex.get(i).getEdgeBetween( vertex.get(i+1)).addAttribute("ui.style", "fill-color: red;");
+        System.out.println("LISTA DE LOS VERTICES"+vertex.size());
+        
+        for (int i = 0; i < vertex.size(); i++) {
+            if (i != vertex.size() - 1) {
+                timeTotal += (int) vertex.get(i).getEdgeBetween(vertex.get(i + 1)).getAttribute("length");
             }
         }
-      
-
-    
-        
-       
+        lbl_time.setText(timeTotal + "");
+        admHilo hilo1 = new admHilo(lbl_time, true, true, timeTotal, vertex);
+        hilo1.start();
         graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
         graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
     }
 
+    void SetDefault(){
+               for (Node node : graph) {//Agrega las etiquetas
+            node.addAttribute("ui.label", node.getId());
+
+        }
+        for (Edge edge : graph.getEachEdge()) {
+            edge.addAttribute("ui.label", (Object) edge.getAttribute("length"));
+        }
+    }
     Graph graph;
+
     protected String styleSheet
             = "node {"
             + "	fill-color: blue;"
+            + "text-size: 10px;"
             + "}"
             + "node.marked {"
             + "	fill-color: green;"
+            + "text-size: 20px;"
             + "}"
             + "node.marked_defult {"
             + "	fill-color: blue;"
+            + "text-size: 10px;"
             + "}"
-             + "node.marked_visited{"
+            + "node.marked_visited{"
             + "	fill-color: yellow;"
+            + "text-size: 10.5px;"
             + "}";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JComboBox<String> jc_here;
     private javax.swing.JComboBox<String> jc_there;
     private javax.swing.JDialog jd_Graph;
     private javax.swing.JPanel jp_show;
+    private javax.swing.JLabel lbl_time;
     // End of variables declaration//GEN-END:variables
 }
