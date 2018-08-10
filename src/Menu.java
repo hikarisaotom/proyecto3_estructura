@@ -60,6 +60,16 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_time = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jd_CreateNewRute = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jc_newhere = new javax.swing.JComboBox<>();
+        jc_newthere = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        txt_newnode = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         jd_Graph.setTitle("Rutas");
@@ -111,6 +121,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Crear Nueva Ruta");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_GraphLayout = new javax.swing.GroupLayout(jd_Graph.getContentPane());
         jd_Graph.getContentPane().setLayout(jd_GraphLayout);
         jd_GraphLayout.setHorizontalGroup(
@@ -118,23 +135,23 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jd_GraphLayout.createSequentialGroup()
                 .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_GraphLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_GraphLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jd_GraphLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_GraphLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)))
-                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jc_there, 0, 185, Short.MAX_VALUE)
-                            .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3))
+                        .addGap(12, 12, 12)))
+                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jc_there, 0, 185, Short.MAX_VALUE)
+                        .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(29, 29, 29)
                         .addComponent(jButton2)))
                 .addGap(18, 18, 18)
                 .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,10 +174,97 @@ public class Menu extends javax.swing.JFrame {
                         .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_time))
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton2))
+                        .addGap(39, 39, 39)
+                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton2)))
                     .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel4.setText("Desde");
+
+        jLabel5.setText("Hasta");
+
+        jButton4.setText("crear");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton4MouseEntered(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("jLabel6");
+
+        jButton5.setText("nodocreate");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_CreateNewRuteLayout = new javax.swing.GroupLayout(jd_CreateNewRute.getContentPane());
+        jd_CreateNewRute.getContentPane().setLayout(jd_CreateNewRuteLayout);
+        jd_CreateNewRuteLayout.setHorizontalGroup(
+            jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_CreateNewRuteLayout.createSequentialGroup()
+                .addGroup(jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_CreateNewRuteLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_CreateNewRuteLayout.createSequentialGroup()
+                                .addGroup(jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
+                                .addGap(38, 38, 38))
+                            .addGroup(jd_CreateNewRuteLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel6)
+                                .addGap(32, 32, 32)))
+                        .addGroup(jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jc_newhere, 0, 141, Short.MAX_VALUE)
+                            .addComponent(jc_newthere, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_newnode)))
+                    .addGroup(jd_CreateNewRuteLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(jButton5)))
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
+        jd_CreateNewRuteLayout.setVerticalGroup(
+            jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_CreateNewRuteLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jc_newhere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_CreateNewRuteLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel5))
+                    .addGroup(jd_CreateNewRuteLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jc_newthere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13)
+                .addGroup(jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_newnode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jd_CreateNewRuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_CreateNewRuteLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4))
+                    .addGroup(jd_CreateNewRuteLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton5)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -211,12 +315,51 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jc_hereItemStateChanged
 
     private void jc_thereItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_thereItemStateChanged
-      SetDefault();
+        SetDefault();
     }//GEN-LAST:event_jc_thereItemStateChanged
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         Dikstra(jc_here.getSelectedItem().toString(), jc_there.getSelectedItem().toString());
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+//        Random ran = new Random();
+//        String vertexA = jc_newhere.getSelectedItem().toString();
+//        String vertexB = jc_newthere.getSelectedItem().toString();
+//        String vertexAB = vertexA + vertexB;
+//        graph.addEdge(vertexA, vertexB, vertexAB).addAttribute("length", ran.nextInt(15) + 1);;
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        jd_CreateNewRute.show();
+        jd_CreateNewRute.pack();
+        jd_CreateNewRute.setLocationRelativeTo(jd_Graph);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        if (graph.getNode(jc_newhere.getSelectedItem().toString()) != null && graph.getNode(jc_newhere.getSelectedItem().toString()) != null) {
+            Random ran = new Random();
+            Node nodexTo = graph.getNode(jc_newhere.getSelectedItem().toString());
+            Node nodexFrom = graph.getNode(jc_newthere.getSelectedItem().toString());
+            String name = nodexTo.getId() + nodexFrom.getId();
+            graph.addEdge(name, nodexTo, nodexFrom).addAttribute("length", ran.nextInt(15) + 1);
+            LoadCombo();
+            SetDefault();
+        }
+
+
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        graph.addNode(txt_newnode.getText());
+        LoadCombo();
+        SetDefault();
+
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4MouseEntered
 
     /**
      * @param args the command line arguments
@@ -251,17 +394,9 @@ public class Menu extends javax.swing.JFrame {
     public void starGraph() {
 
         graph = CreateGraph(ReadFile());
-        DefaultComboBoxModel modelHere = new DefaultComboBoxModel();
-        DefaultComboBoxModel modelThere = new DefaultComboBoxModel();
-        for (Node node : graph) {
-            modelHere.addElement(node);
-            modelThere.addElement(node);
-        }
-        jc_here.setModel(modelHere);
-        jc_there.setModel(modelThere);
-         SetDefault();
+        LoadCombo();
+        SetDefault();
         graph.addAttribute("ui.stylesheet", styleSheet);
-
     }
 
     private void display() {
@@ -300,11 +435,29 @@ public class Menu extends javax.swing.JFrame {
         return null;
     }
 
+    public void LoadCombo() {
+        DefaultComboBoxModel modelHere = new DefaultComboBoxModel();
+        DefaultComboBoxModel modelThere = new DefaultComboBoxModel();
+        DefaultComboBoxModel modelNewThere = new DefaultComboBoxModel();
+        DefaultComboBoxModel modelNewHere = new DefaultComboBoxModel();
+
+        for (Node node : graph) {
+            modelHere.addElement(node);
+            modelThere.addElement(node);
+            modelNewThere.addElement(node);
+            modelNewHere.addElement(node);
+        }
+        jc_here.setModel(modelHere);
+        jc_there.setModel(modelThere);
+        jc_newhere.setModel(modelNewHere);
+        jc_newthere.setModel(modelNewThere);
+    }
+
     public Graph CreateGraph(File toCreate) {
         Graph graph = new SingleGraph("Principal Graph");
         graph.setNullAttributesAreErrors(true);//para evitar elementos en nulo 
-        graph.setStrict(false);
-        graph.setAutoCreate(true);
+        // graph.setStrict(false);
+        //  graph.setAutoCreate(true);
         if (toCreate.exists()) {
             Scanner sc = null;
             try {
@@ -312,21 +465,32 @@ public class Menu extends javax.swing.JFrame {
                 while (sc.hasNext()) {
 
                     String data[] = sc.next().split(",");
-                    for (int i = 0; i < 3; i++) {//el largo deberia ser 3                         
-                        if (i == 2) {
+                    for (int i = 0; i < 3; i++) {//el largo deberia ser 3 
+                        if (i != 2) {
+                            if (!(graph.getNode(data[i]) != null)) {
+                                Node node = graph.addNode(data[i]);
 
+                            }
+                        } else {
                             if (!(graph.getEdge(data[2]) != null)) {
                                 Random ran = new Random();
                                 graph.addEdge(data[2], data[0], data[1]).addAttribute("length", ran.nextInt(15) + 1);
                             }
                         }
+//                        if (i == 2) {
+//
+//                            if (!(graph.getEdge(data[2]) != null)) {
+//                                Random ran = new Random();
+//                                graph.addEdge(data[2], data[0], data[1]).addAttribute("length", ran.nextInt(15) + 1);
+//                            }
+//                        }
                     }
                 }
             } catch (Exception e) {
             }
             sc.close();
         }//Fin del if 
-       
+
         return graph;
     }
 
@@ -338,7 +502,7 @@ public class Menu extends javax.swing.JFrame {
         /*Seteamos los colores a azul nuevamente*/
         for (Node node : graph) {
             node.setAttribute("ui.class", "marked_defult");
-            node.getEdge(0).addAttribute("ui.style", "fill-color: black;");
+            // node.getEdge(0).addAttribute("ui.style", "fill-color: black;");
         }
         /*coloreamos los nodos que sirvan como conexion*/
         ArrayList<Node> vertex = new ArrayList<Node>();
@@ -347,8 +511,8 @@ public class Menu extends javax.swing.JFrame {
             node.addAttribute("ui.class", "marked_visited");
             vertex.add(0, node);
         }
-        System.out.println("LISTA DE LOS VERTICES"+vertex.size());
-        
+        System.out.println("LISTA DE LOS VERTICES" + vertex.size());
+
         for (int i = 0; i < vertex.size(); i++) {
             if (i != vertex.size() - 1) {
                 timeTotal += (int) vertex.get(i).getEdgeBetween(vertex.get(i + 1)).getAttribute("length");
@@ -361,8 +525,8 @@ public class Menu extends javax.swing.JFrame {
         graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
     }
 
-    void SetDefault(){
-               for (Node node : graph) {//Agrega las etiquetas
+    void SetDefault() {
+        for (Node node : graph) {//Agrega las etiquetas
             node.addAttribute("ui.label", node.getId());
 
         }
@@ -392,13 +556,23 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox<String> jc_here;
+    private javax.swing.JComboBox<String> jc_newhere;
+    private javax.swing.JComboBox<String> jc_newthere;
     private javax.swing.JComboBox<String> jc_there;
+    private javax.swing.JDialog jd_CreateNewRute;
     private javax.swing.JDialog jd_Graph;
     private javax.swing.JPanel jp_show;
     private javax.swing.JLabel lbl_time;
+    private javax.swing.JTextField txt_newnode;
     // End of variables declaration//GEN-END:variables
 }

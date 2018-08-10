@@ -51,7 +51,7 @@ public class admHilo extends Thread {
             }
 
         } else {
-JOptionPane.showMessageDialog(null,"No existe conexión entre los destinos","No se puede calcular la ruta",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No existe conexión entre los destinos", "No se puede calcular la ruta", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
