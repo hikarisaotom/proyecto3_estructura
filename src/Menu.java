@@ -25,6 +25,7 @@ import org.graphstream.algorithm.Prim;
 //import org.graphstream.algorithm.generator.DorogovtsevMendesGenerator;
 /**/
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,9 +71,10 @@ public class Menu extends javax.swing.JFrame {
         btn_iniciar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btn_recorrido = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txta_articulation = new javax.swing.JTextArea();
+        jc_diagnostic = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -165,7 +167,7 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jc_there, 0, 129, Short.MAX_VALUE)
+                        .addComponent(jc_there, 0, 181, Short.MAX_VALUE)
                         .addContainerGap(8, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
@@ -206,12 +208,22 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Calles en alerta de dejar incomunicada la ciudad");
-
         txta_articulation.setColumns(20);
         txta_articulation.setRows(5);
         txta_articulation.setEnabled(false);
         jScrollPane1.setViewportView(txta_articulation);
+
+        jc_diagnostic.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Calles que pueden dejar incomunicada la ciudad", "calles cerradas el dia de hoy", "camino mas corto por toda la ciudad", "Comparacion Cerrados-Cortaron acceso" }));
+        jc_diagnostic.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jc_diagnosticItemStateChanged(evt);
+            }
+        });
+        jc_diagnostic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jc_diagnosticActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -220,12 +232,11 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_recorrido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
-                        .addGap(0, 12, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addComponent(btn_recorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jc_diagnostic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -233,14 +244,16 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_recorrido)
-                .addGap(24, 24, 24)
-                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jc_diagnostic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("General", jPanel4);
+
+        jLabel7.setText("Anuncio que va cambiando");
 
         jMenu2.setText("Archivo");
 
@@ -273,9 +286,14 @@ public class Menu extends javax.swing.JFrame {
         jd_GraphLayout.setHorizontalGroup(
             jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_GraphLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jTabbedPane2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_GraphLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jTabbedPane2))
+                    .addGroup(jd_GraphLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -288,7 +306,9 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jd_GraphLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel7)))
                 .addContainerGap(461, Short.MAX_VALUE))
         );
 
@@ -526,8 +546,7 @@ public class Menu extends javax.swing.JFrame {
         try {
             Prim();
             DFS();
-            System.out.println("EMPEZANDO HASh");
-            Articulation();
+            Articulation(true);
         } catch (InterruptedException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -537,6 +556,27 @@ public class Menu extends javax.swing.JFrame {
     private void btn_recorridoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_recorridoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_recorridoActionPerformed
+
+    private void jc_diagnosticItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_diagnosticItemStateChanged
+
+    }//GEN-LAST:event_jc_diagnosticItemStateChanged
+
+    private void jc_diagnosticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_diagnosticActionPerformed
+        if (jc_diagnostic.getSelectedIndex() == 0) {
+            Articulation(true);
+        } else if (jc_diagnostic.getSelectedIndex() == 1) {
+            CrashGenerated(true);
+        } else if (jc_diagnostic.getSelectedIndex() == 3){
+            Comparative(Articulation(false), CrashGenerated(false));
+        }else{
+            Prim();
+            try {
+                DFS();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jc_diagnosticActionPerformed
 
     /**
      * @param args the command line arguments
@@ -681,6 +721,22 @@ public class Menu extends javax.swing.JFrame {
         }
     }
 
+    ArrayList<Node> CrashGenerated(boolean showText) {
+        ArrayList<Node> closed = new ArrayList();
+        String isClosed = "";
+        for (int i = 0; i < graph.getNodeCount(); i++) {
+
+            if ((boolean) graph.getNode(i).getAttribute("estate")) {
+                isClosed += "\n" + graph.getNode(i).getId();
+                closed.add(graph.getNode(i));
+            }
+        }
+        if (showText) {
+            txta_articulation.setText(isClosed);
+        }
+        return closed;
+    }
+
     public void Dikstra(String from, String to) {
         admHilo hilo1 = new admHilo(lbl_time, jc_here, jc_there, btn_iniciar, graph);
         hilo1.Dikstra(from, to);
@@ -703,15 +759,15 @@ public class Menu extends javax.swing.JFrame {
     }
 
     public void Prim() {
-        for (Edge edge : graph.getEachEdge()) {
+        /*  for (Edge edge : graph.getEachEdge()) {
             edge.addAttribute("weight", (Object) edge.getAttribute("length"));
-        }
+        }*/
         Prim prim = new Prim("ui.class", "intree", "notintree");
         prim.init(graph);
         prim.compute();
     }
 
-    void SetDefault() {
+    public void SetDefault() {
         for (Node node : graph) {
             if (!((boolean) node.getAttribute("estate"))) {
                 node.setAttribute("ui.class", "marked_defult");
@@ -731,21 +787,34 @@ public class Menu extends javax.swing.JFrame {
 
     }
 
-    void Articulation() {
-         String dangerIfIsClosed="";
+    ArrayList<Node> Articulation(boolean showText) {
+        ArrayList<Node> articulations = new ArrayList();
+        String dangerIfIsClosed = "";
         for (int i = 0; i < graph.getNodeCount(); i++) {
-           
             if ((Double) graph.getNode(i).getAttribute("Cb") > 2.0) {
-                String temp="\n"+graph.getNode(i).getId();
-                dangerIfIsClosed+=temp;
-              //  System.out.println(graph.getNode(i).getId() + " " + graph.getNode(i).getAttribute("Cb") + "POSIBLE PUNTO DE ARTICULACION");
-            } else {
-                //System.out.println(graph.getNode(i).getId() + " " + graph.getNode(i).getAttribute("Cb") + "SIN PELIGRO");
-
+                dangerIfIsClosed += "\n" + graph.getNode(i).getId();
+                articulations.add(graph.getNode(i));
             }
-
         }
-        txta_articulation.setText(dangerIfIsClosed);
+        if (showText) {
+            txta_articulation.setText(dangerIfIsClosed);
+        }
+        return articulations;
+    }
+    public void Comparative(ArrayList<Node> articulations,ArrayList<Node> closed){
+       String noAcces="";
+        for (Node node : closed) {
+            if(articulations.contains(node)){
+                noAcces+="\n"+node.getId();
+            }
+        }
+        if(noAcces.length()>0){
+            noAcces+="\n\n NO HAY ACCESO A CIERTAS PARTES DE LA CIUDAD HOY";
+            txta_articulation.setText(noAcces);
+        }else{
+             noAcces+="\n\n Ninguna calle importante esta cerrrada hoy";
+            txta_articulation.setText(noAcces);
+        }
     }
     Graph graph;
     protected String styleSheet
@@ -830,6 +899,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JComboBox<String> jc_diagnostic;
     private javax.swing.JComboBox<String> jc_here;
     private javax.swing.JComboBox<String> jc_newhere;
     private javax.swing.JComboBox<String> jc_newthere;
