@@ -1,4 +1,5 @@
 
+import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -68,7 +69,7 @@ public class admHilo extends Thread {
         SetDefault();
         vertex = new ArrayList<Node>();
         timeTotal = 0;
-        HideElements();
+        // HideElements();
         for (Node node : dijkstra.getPathNodes(graph.getNode(to))) {
             node.addAttribute("ui.class", "marked_visited");
 
@@ -82,13 +83,20 @@ public class admHilo extends Thread {
         lbl_time.setText(timeTotal + "");
         graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
         graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
-
+        /*RUTA MENOS EFECTIVA*/
+       dijkstra.getPath(graph.getNode("B")).getNodePath();
+       
     }
 
     @Override
     public void run() {
         jc_here.disable();
         jc_there.disable();
+        for (int i = 0; i < vertex.size(); i++) {
+            if (i != vertex.size() - 1) {
+                vertex.get(i).getEdgeBetween(vertex.get(i + 1)).addAttribute("ui.class", "highlight1");
+            }
+        }
         btn_iniciar.show(false);
         if (!(vertex.size() == 0)) {
             while (avance) {
@@ -111,8 +119,6 @@ public class admHilo extends Thread {
                         for (int i = 0; i < vertex.size(); i++) {
                             if (i != vertex.size() - 1) {
                                 try {
-                                    vertex.get(i).getEdgeBetween(vertex.get(i + 1)).addAttribute("ui.class", "highlight_black");
-
                                     Thread.sleep(3000);
                                     vertex.get(i).getEdgeBetween(vertex.get(i + 1)).addAttribute("ui.class", "highlight");
                                     timeTotal -= (int) vertex.get(i).getEdgeBetween(vertex.get(i + 1)).getAttribute("length");
@@ -126,7 +132,6 @@ public class admHilo extends Thread {
                     }
                 }
             }
-
         } else {
             JOptionPane.showMessageDialog(null, "No existe conexión entre los destinos", "No se puede calcular la ruta", JOptionPane.ERROR_MESSAGE);
         }
