@@ -20,18 +20,22 @@ import org.graphstream.ui.swingViewer.ViewPanel;
 
 /*view*/
 import org.graphstream.ui.view.Viewer;
-import org.graphstream.ui.view.View;
+//import org.graphstream.ui.view.View;
+import org.graphstream.algorithm.Prim;
+//import org.graphstream.algorithm.generator.DorogovtsevMendesGenerator;
 /**/
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.*;
-import javax.swing.border.*;
-import org.graphstream.algorithm.Dijkstra;
-import org.graphstream.graph.*;
-import org.graphstream.graph.implementations.*;
-import org.graphstream.ui.swingViewer.*;
-import org.graphstream.ui.view.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+//import javax.swing.*;
+//import javax.swing.border.*;
+//import org.graphstream.algorithm.generator.BarabasiAlbertGenerator;
+//import org.graphstream.graph.*;
+//import org.graphstream.graph.implementations.*;
+//import org.graphstream.ui.swingViewer.*;
+//import org.graphstream.ui.view.*;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -40,6 +44,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+
     }
 
     /**
@@ -52,14 +57,18 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jd_Graph = new javax.swing.JDialog();
+        jp_show = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jc_here = new javax.swing.JComboBox<>();
         jc_there = new javax.swing.JComboBox<>();
-        jp_show = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbl_time = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btn_iniciar = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        btn_recorrido = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -83,9 +92,22 @@ public class Menu extends javax.swing.JFrame {
         jd_Graph.setBounds(new java.awt.Rectangle(0, 0, 100000, 100000));
         jd_Graph.setLocation(new java.awt.Point(0, 0));
 
-        jLabel1.setText("Locacion Actual");
+        jp_show.setBackground(new java.awt.Color(0, 0, 0));
+        jp_show.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jp_show.setPreferredSize(new java.awt.Dimension(800, 750));
 
-        jLabel2.setText("destino");
+        javax.swing.GroupLayout jp_showLayout = new javax.swing.GroupLayout(jp_show);
+        jp_show.setLayout(jp_showLayout);
+        jp_showLayout.setHorizontalGroup(
+            jp_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        jp_showLayout.setVerticalGroup(
+            jp_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 750, Short.MAX_VALUE)
+        );
+
+        jLabel1.setText("Locacion Actual");
 
         jc_here.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -104,31 +126,95 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jp_show.setBackground(new java.awt.Color(0, 0, 0));
-        jp_show.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jp_show.setPreferredSize(new java.awt.Dimension(800, 750));
-
-        javax.swing.GroupLayout jp_showLayout = new javax.swing.GroupLayout(jp_show);
-        jp_show.setLayout(jp_showLayout);
-        jp_showLayout.setHorizontalGroup(
-            jp_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        jp_showLayout.setVerticalGroup(
-            jp_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
-        );
+        jLabel2.setText("destino");
 
         jLabel3.setText("tiempo estimado:");
 
         lbl_time.setText("N/A");
 
-        jButton2.setText("Iniciar Recorrido");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_iniciar.setText("Iniciar Recorrido");
+        btn_iniciar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btn_iniciarMouseClicked(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jc_there, 0, 129, Short.MAX_VALUE)
+                        .addContainerGap(8, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(btn_iniciar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jc_here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jc_there, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_time))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addComponent(btn_iniciar)
+                .addGap(110, 110, 110))
+        );
+
+        jTabbedPane2.addTab("Particular", jPanel3);
+
+        btn_recorrido.setText("DFS");
+        btn_recorrido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_recorridoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(btn_recorrido)
+                .addContainerGap(155, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(179, 179, 179)
+                .addComponent(btn_recorrido)
+                .addContainerGap(200, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("General", jPanel4);
 
         jMenu2.setText("Archivo");
 
@@ -161,48 +247,22 @@ public class Menu extends javax.swing.JFrame {
         jd_GraphLayout.setHorizontalGroup(
             jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_GraphLayout.createSequentialGroup()
-                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_GraphLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)))
-                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jc_there, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(0, 29, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                .addGap(6, 6, 6)
+                .addComponent(jTabbedPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jd_GraphLayout.setVerticalGroup(
             jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_GraphLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jc_here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
-                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jc_there, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_time))
-                        .addGap(39, 39, 39)
-                        .addComponent(jButton2))
-                    .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jd_GraphLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(461, Short.MAX_VALUE))
         );
 
@@ -367,19 +427,19 @@ public class Menu extends javax.swing.JFrame {
 
     private void jc_hereItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_hereItemStateChanged
         SetDefault();
-         graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
+        graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
         graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
     }//GEN-LAST:event_jc_hereItemStateChanged
 
     private void jc_thereItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_thereItemStateChanged
         SetDefault();
-         graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
+        graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
         graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
     }//GEN-LAST:event_jc_thereItemStateChanged
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btn_iniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciarMouseClicked
         Dikstra(jc_here.getSelectedItem().toString(), jc_there.getSelectedItem().toString());
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_btn_iniciarMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
@@ -391,9 +451,17 @@ public class Menu extends javax.swing.JFrame {
             Node nodexTo = graph.getNode(jc_newhere.getSelectedItem().toString());
             Node nodexFrom = graph.getNode(jc_newthere.getSelectedItem().toString());
             String name = nodexTo.getId() + nodexFrom.getId();
-            graph.addEdge(name, nodexTo, nodexFrom).addAttribute("length", ran.nextInt(15) + 1);
-            LoadCombo();
-            SetDefault();
+            String name2 = nodexFrom.getId() + nodexTo.getId();
+            if (graph.getEdge(name) == null && graph.getEdge(name2) == null&&nodexTo!=nodexFrom) {
+                graph.addEdge(name, nodexTo, nodexFrom).addAttribute("length", ran.nextInt(15) + 1);
+                LoadCombo();
+                SetDefault();
+                JOptionPane.showMessageDialog(null, "Ruta Creada Exitosamente", "Ruta Creada", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "La ruta deseada ya existe, o hace referencia a si misma", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+
         }
 
 
@@ -416,10 +484,13 @@ public class Menu extends javax.swing.JFrame {
         jp_show.removeAll();
         starGraph();
         display();
+        btn_iniciar.show(true);
+        btn_recorrido.show(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        btn_iniciar.show(false);
+        btn_recorrido.show(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -427,6 +498,17 @@ public class Menu extends javax.swing.JFrame {
         jd_CreateNewRute.pack();
         jd_CreateNewRute.setLocationRelativeTo(jd_Graph);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void btn_recorridoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_recorridoMouseClicked
+
+        try {
+            Prim();
+            DFS();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btn_recorridoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -554,10 +636,9 @@ public class Menu extends javax.swing.JFrame {
     public void GenerateCrash() {
         Random ranCrash = new Random();
         Random ranLucky = new Random();
-        int lucky = ranLucky.nextInt(6) + 1;
-
+        int lucky = ranLucky.nextInt((graph.getEdgeCount() / 2)) + 1;
         for (int i = 0; i < lucky; i++) {
-            int crash = ranCrash.nextInt(graph.getEdgeCount() - 1);
+            int crash = ranCrash.nextInt(graph.getEdgeCount() - 2);
             graph.getNode(crash).setAttribute("ui.class", "marked_closed");
             graph.getNode(crash).setAttribute("estate", true);
 
@@ -565,41 +646,47 @@ public class Menu extends javax.swing.JFrame {
     }
 
     public void Dikstra(String from, String to) {
-        Graph graph1 = graph;
-        Dijkstra dijkstra = new Dijkstra(Dijkstra.Element.EDGE, "result", "length");
-        dijkstra.init(graph1);
-        dijkstra.setSource(graph1.getNode(from));
-        dijkstra.compute();
-        SetDefault();
-        ArrayList<Node> vertex = new ArrayList<Node>();
-        int timeTotal = 0;
-        for (Node node : dijkstra.getPathNodes(graph1.getNode(to))) {
-            node.addAttribute("ui.class", "marked_visited");
-
-            vertex.add(0, node);
-        }
-
-        for (int i = 0; i < vertex.size(); i++) {
-            if (i != vertex.size() - 1) {
-                timeTotal += (int) vertex.get(i).getEdgeBetween(vertex.get(i + 1)).getAttribute("length");
-            }
-        }
-        lbl_time.setText(timeTotal + "");
-        admHilo hilo1 = new admHilo(lbl_time, true, true, timeTotal, vertex);
+        admHilo hilo1 = new admHilo(lbl_time, jc_here, jc_there, btn_iniciar, graph);
+        hilo1.Dikstra(from, to);
         hilo1.start();
         graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
         graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
 
     }
 
+    public void DFS() throws InterruptedException {
+        int level = 0;
+        DepthFirstIterator it = new DepthFirstIterator(graph.getNode(jc_here.getSelectedItem().toString()));
+        graph.getNode(0).setAttribute("level", level);
+        while (it.hasNext()) {
+            Node n = it.next();
+            level += 1;
+            n.setAttribute("level", level);
+            n.addAttribute("ui.label", n.getId());
+            System.out.println(n.getId() + " " + n.getAttribute("level"));
+
+        }
+    }
+
+    public void Prim() {
+        for (Edge edge : graph.getEachEdge()) {
+            edge.addAttribute("weight", (Object) edge.getAttribute("length"));
+        }
+        Prim prim = new Prim("ui.class", "intree", "notintree");
+        prim.init(graph);
+        prim.compute();
+    }
+
     void SetDefault() {
-         for (Node node : graph) {
+        for (Node node : graph) {
             if (!((boolean) node.getAttribute("estate"))) {
                 node.setAttribute("ui.class", "marked_defult");
+            } else {
+                node.setAttribute("ui.class", "marked_closed");
             }
         }
-         for (Edge edge : graph.getEachEdge()) {
-            edge.addAttribute("ui.style", "fill-color: black;");
+        for (Edge edge : graph.getEachEdge()) {
+            edge.addAttribute("ui.class", "highlight_black");
         }
         for (Node node : graph) {//Agrega las etiquetas
             node.addAttribute("ui.label", node.getId());
@@ -609,6 +696,7 @@ public class Menu extends javax.swing.JFrame {
         }
 
     }
+
     Graph graph;
     protected String styleSheet
             = "node {"
@@ -635,10 +723,34 @@ public class Menu extends javax.swing.JFrame {
             + "graph {\n"
             + " fill-color: gray;\n"
             + "  fill-mode: plain;"
+            + "}"
+            + "edge.highlight {  "
+            + "   fill-color: rgb(200,39,65);\n"
+            + "   size: 3px;"
+            + "}"
+            + "edge.highlight_black {  "
+            + "   fill-color: black;\n"
+            + "   size: 3px;"
+            + "}"
+            + "edge .notintree {"
+            + "size:1px;fill-color:black;"
+            + "} "
+            + "edge .intree {"
+            + "size:3px;"
+            + "fill-color:orange;"
+            + "}"
+            + "node.hide {"
+            + "	fill-color: gray;"
+            + "text-size: 0px;"
+            + "}"
+            + "edge.hide {"
+            + "	fill-color: gray;"
+            + "text-size: 0px;"
             + "}";
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_iniciar;
+    private javax.swing.JButton btn_recorrido;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -654,7 +766,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JComboBox<String> jc_here;
     private javax.swing.JComboBox<String> jc_newhere;
     private javax.swing.JComboBox<String> jc_newthere;
