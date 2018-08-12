@@ -46,7 +46,8 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-
+        admNews hilo1 = new admNews(lbl_showNewsStart, "hello", jp_newStart);
+        hilo1.start();
     }
 
     /**
@@ -74,7 +75,8 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txta_articulation = new javax.swing.JTextArea();
         jc_diagnostic = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
+        jp_showNews = new javax.swing.JPanel();
+        lbl_showNews = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -93,10 +95,14 @@ public class Menu extends javax.swing.JFrame {
         txt_newnode = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jp_newStart = new javax.swing.JPanel();
+        lbl_showNewsStart = new javax.swing.JLabel();
 
         jd_Graph.setTitle("Rutas");
+        jd_Graph.setBackground(new java.awt.Color(0, 0, 0));
         jd_Graph.setBounds(new java.awt.Rectangle(0, 0, 100000, 100000));
         jd_Graph.setLocation(new java.awt.Point(0, 0));
+        jd_Graph.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jp_show.setBackground(new java.awt.Color(0, 0, 0));
         jp_show.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
@@ -113,7 +119,9 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 750, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("Locacion Actual");
+        jd_Graph.getContentPane().add(jp_show, new org.netbeans.lib.awtextra.AbsoluteConstraints(393, 11, -1, -1));
+
+        jLabel1.setText("Locacon");
 
         jc_here.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -132,7 +140,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("destino");
+        jLabel2.setText("Destino");
 
         jLabel3.setText("tiempo estimado:");
 
@@ -149,30 +157,28 @@ public class Menu extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jc_there, 0, 181, Short.MAX_VALUE)
-                        .addContainerGap(8, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(lbl_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(99, 99, 99)
                 .addComponent(btn_iniciar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jc_there, 0, 246, Short.MAX_VALUE)
+                    .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,16 +188,16 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jc_here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jc_there, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_time))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(btn_iniciar)
-                .addGap(110, 110, 110))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Particular", jPanel3);
@@ -207,6 +213,9 @@ public class Menu extends javax.swing.JFrame {
                 btn_recorridoActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setBorder(null);
 
         txta_articulation.setColumns(20);
         txta_articulation.setRows(5);
@@ -232,11 +241,12 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jc_diagnostic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btn_recorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jc_diagnostic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_recorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -247,13 +257,38 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jc_diagnostic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("General", jPanel4);
 
-        jLabel7.setText("Anuncio que va cambiando");
+        jd_Graph.getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 33, 380, -1));
+
+        jp_showNews.setBackground(new java.awt.Color(0, 204, 204));
+        jp_showNews.setPreferredSize(new java.awt.Dimension(162, 162));
+
+        lbl_showNews.setForeground(new java.awt.Color(0, 153, 51));
+        lbl_showNews.setText("jLabel7");
+
+        javax.swing.GroupLayout jp_showNewsLayout = new javax.swing.GroupLayout(jp_showNews);
+        jp_showNews.setLayout(jp_showNewsLayout);
+        jp_showNewsLayout.setHorizontalGroup(
+            jp_showNewsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_showNewsLayout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(lbl_showNews)
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+        jp_showNewsLayout.setVerticalGroup(
+            jp_showNewsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_showNewsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_showNews)
+                .addContainerGap(175, Short.MAX_VALUE))
+        );
+
+        jd_Graph.getContentPane().add(jp_showNews, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 370, 200));
 
         jMenu2.setText("Archivo");
 
@@ -280,37 +315,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jd_Graph.setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout jd_GraphLayout = new javax.swing.GroupLayout(jd_Graph.getContentPane());
-        jd_Graph.getContentPane().setLayout(jd_GraphLayout);
-        jd_GraphLayout.setHorizontalGroup(
-            jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jd_GraphLayout.createSequentialGroup()
-                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jTabbedPane2))
-                    .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jd_GraphLayout.setVerticalGroup(
-            jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jd_GraphLayout.createSequentialGroup()
-                .addGroup(jd_GraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jp_show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jd_GraphLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel7)))
-                .addContainerGap(461, Short.MAX_VALUE))
-        );
 
         jLabel4.setText("Desde");
 
@@ -425,6 +429,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Empezar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -437,23 +442,30 @@ public class Menu extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 401, 153, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(250, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(233, 233, 233))
+        jp_newStart.setBackground(new java.awt.Color(0, 204, 204));
+
+        lbl_showNewsStart.setText("jLabel7");
+
+        javax.swing.GroupLayout jp_newStartLayout = new javax.swing.GroupLayout(jp_newStart);
+        jp_newStart.setLayout(jp_newStartLayout);
+        jp_newStartLayout.setHorizontalGroup(
+            jp_newStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_newStartLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(lbl_showNewsStart)
+                .addContainerGap(490, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(401, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(26, 26, 26))
+        jp_newStartLayout.setVerticalGroup(
+            jp_newStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_newStartLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(lbl_showNewsStart)
+                .addContainerGap(203, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jp_newStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 290));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -529,6 +541,14 @@ public class Menu extends javax.swing.JFrame {
         display();
         btn_iniciar.show(true);
         btn_recorrido.show(true);
+        ArrayList<Node> closed = CrashGenerated(false);
+        String closed01 = "";
+        for (int i = 0; i < closed.size(); i++) {
+            closed01 += closed.get(i).getId() + "<br>";
+        }
+        String Datos = "<html><body>Las calle cerradas son:  varias <br>" + closed01 + "</body></html>";
+        admNews hilo1 = new admNews(lbl_showNews, Datos, jp_showNews);
+        hilo1.start();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -563,12 +583,20 @@ public class Menu extends javax.swing.JFrame {
 
     private void jc_diagnosticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_diagnosticActionPerformed
         if (jc_diagnostic.getSelectedIndex() == 0) {
-            Articulation(true);
+            ArrayList<Node> articulation = Articulation(true);
+            SetDefault();
+            for (Node node : articulation) {
+                node.setAttribute("ui.class", "marked_articulation");
+            }
         } else if (jc_diagnostic.getSelectedIndex() == 1) {
             CrashGenerated(true);
-        } else if (jc_diagnostic.getSelectedIndex() == 3){
+            SetDefault();
+
+        } else if (jc_diagnostic.getSelectedIndex() == 3) {
             Comparative(Articulation(false), CrashGenerated(false));
-        }else{
+            
+        } else {
+            txta_articulation.setText("");
             Prim();
             try {
                 DFS();
@@ -801,18 +829,19 @@ public class Menu extends javax.swing.JFrame {
         }
         return articulations;
     }
-    public void Comparative(ArrayList<Node> articulations,ArrayList<Node> closed){
-       String noAcces="";
+
+    public void Comparative(ArrayList<Node> articulations, ArrayList<Node> closed) {
+        String noAcces = "";
         for (Node node : closed) {
-            if(articulations.contains(node)){
-                noAcces+="\n"+node.getId();
+            if (articulations.contains(node)) {
+                noAcces += "\n" + node.getId();
             }
         }
-        if(noAcces.length()>0){
-            noAcces+="\n\n NO HAY ACCESO A CIERTAS PARTES DE LA CIUDAD HOY";
+        if (noAcces.length() > 0) {
+            noAcces += "\n\n NO HAY ACCESO A CIERTAS PARTES DE LA CIUDAD HOY";
             txta_articulation.setText(noAcces);
-        }else{
-             noAcces+="\n\n Ninguna calle importante esta cerrrada hoy";
+        } else {
+            noAcces += "\n\n Ninguna calle importante esta cerrrada hoy";
             txta_articulation.setText(noAcces);
         }
     }
@@ -820,39 +849,52 @@ public class Menu extends javax.swing.JFrame {
     protected String styleSheet
             = "node {"
             + "	fill-color: blue;"
-            + "text-size: 10px;"
+            + "text-size: 15px;"
             + "}"
             + "node.marked {"
             + "	fill-color: green;"
+            + "text-color: green;"
             + "shape: box;"
             + "text-size: 20px;"
             + "}"
             + "node.marked_defult {"
-            + "	fill-color: blue;"
-            + "text-size: 10px;"
+            + "fill-color: blue;"
+            + "text-color: black;"
+            + "text-size: 15px;"
             + "}"
             + "node.marked_visited{"
             + "	fill-color: yellow;"
             + "text-size: 10.5px;"
             + "}"
             + "node.marked_closed{"
-            + "	fill-color: red;"
-            + "text-size: 10px;"
+            + "fill-color: red;"
+            + "text-color: black;"
+            + "text-size: 15px;"
+            + "}"
+            + "node.marked_articulation{"
+            + "	fill-color: orange;"
+            + "text-size: 15px;"
             + "}"
             + "graph {\n"
             + " fill-color: gray;\n"
-            + "  fill-mode: plain;"
+            + "fill-mode: plain;"
             + "}"
             + "edge.highlight {  "
-            + "   fill-color: rgb(200,39,65);\n"
-            + "   size: 3px;"
+            + "fill-color: rgb(200,39,65);\n"
+            + "text-color: black;"
+            + "text-size: 15px;"
+            + "size: 3px;"
             + "}"
             + "edge.highlight_black {  "
-            + "   fill-color: black;\n"
+            + " fill-color: black;\n"
+            + "text-color: black;"
+            + "text-size: 15px;"
             + "   size: 3px;"
             + "}"
             + "edge.highlight1 {  "
             + "   fill-color: green;\n"
+            + "text-color: black;"
+            + "text-size: 15px;"
             + "   size: 3px;"
             + "}"
             + "edge.highlightalter {  "
@@ -886,7 +928,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
@@ -906,7 +947,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jc_there;
     private javax.swing.JDialog jd_CreateNewRute;
     private javax.swing.JDialog jd_Graph;
+    private javax.swing.JPanel jp_newStart;
     private javax.swing.JPanel jp_show;
+    private javax.swing.JPanel jp_showNews;
+    private javax.swing.JLabel lbl_showNews;
+    private javax.swing.JLabel lbl_showNewsStart;
     private javax.swing.JLabel lbl_time;
     private javax.swing.JTextField txt_newnode;
     private javax.swing.JTextArea txta_articulation;
