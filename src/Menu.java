@@ -70,6 +70,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_time = new javax.swing.JLabel();
         btn_iniciar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btn_recorrido = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -153,6 +154,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("copiar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -179,6 +187,10 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jc_there, 0, 246, Short.MAX_VALUE)
                     .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(102, 102, 102))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +209,9 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(lbl_time))
                 .addGap(38, 38, 38)
                 .addComponent(btn_iniciar)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jButton2)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Particular", jPanel3);
@@ -594,7 +608,7 @@ public class Menu extends javax.swing.JFrame {
 
         } else if (jc_diagnostic.getSelectedIndex() == 3) {
             Comparative(Articulation(false), CrashGenerated(false));
-            
+
         } else {
             txta_articulation.setText("");
             Prim();
@@ -605,6 +619,10 @@ public class Menu extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jc_diagnosticActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        CopyGraph();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -845,6 +863,36 @@ public class Menu extends javax.swing.JFrame {
             txta_articulation.setText(noAcces);
         }
     }
+
+    public void CreateAlternativeRute() {
+
+    }
+
+    public Graph CopyGraph() {
+        Graph tempGraph = new SingleGraph("Temporal Graph");
+        for (Node node : graph) {
+            if (!(boolean) node.getAttribute("estate")) {
+                tempGraph.addNode(node.getId());
+                tempGraph.getNode(node.getId()).addAttribute("ui.label", node.getId());
+            }
+        }
+        for (Edge edge : graph.getEachEdge()) {
+            Node nodeLeft = edge.getNode0();
+            Node nodeRight = edge.getNode1();
+            if (tempGraph.getNode(nodeLeft.getId()) != null && tempGraph.getNode(nodeRight.getId()) != null) {
+                tempGraph.addEdge(edge.getId(), nodeLeft.getId(), nodeRight.getId());
+                tempGraph.getEdge(edge.getId()).addAttribute("ui.label", (Object) edge.getAttribute("length"));
+            } else {
+                System.out.println("LOS QUE NO SE AGREGARON: ");
+                System.out.println("ARISTA" + edge.getId());
+                System.out.println("NODO IZQUIERDA" + nodeLeft.getId());
+                System.out.println("NODO DERECHA" + nodeRight.getId());
+            }
+        }
+
+        tempGraph.display();
+        return tempGraph;
+    }
     Graph graph;
     protected String styleSheet
             = "node {"
@@ -920,6 +968,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btn_iniciar;
     private javax.swing.JButton btn_recorrido;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;

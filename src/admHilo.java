@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import org.graphstream.algorithm.Dijkstra;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
 
 public class admHilo extends Thread {
 
@@ -60,9 +61,33 @@ public class admHilo extends Thread {
             edge.addAttribute("ui.class", " hide");
         }
     }
-
+    public Graph CopyGraph() {
+        Graph tempGraph = new SingleGraph("Temporal Graph");
+        for (Node node : graph) {
+            if (!(boolean) node.getAttribute("estate")) {
+                tempGraph.addNode(node.getId());
+                tempGraph.getNode(node.getId()).addAttribute("ui.label", node.getId());
+            }
+        }
+        for (Edge edge : graph.getEachEdge()) {
+            Node nodeLeft = edge.getNode0();
+            Node nodeRight = edge.getNode1();
+            if (tempGraph.getNode(nodeLeft.getId()) != null && tempGraph.getNode(nodeRight.getId()) != null) {
+                tempGraph.addEdge(edge.getId(), nodeLeft.getId(), nodeRight.getId());
+                tempGraph.getEdge(edge.getId()).addAttribute("ui.label", (Object) edge.getAttribute("length"));
+            } else {
+                System.out.println("LOS QUE NO SE AGREGARON: ");
+                System.out.println("ARISTA" + edge.getId());
+                System.out.println("NODO IZQUIERDA" + nodeLeft.getId());
+                System.out.println("NODO DERECHA" + nodeRight.getId());
+            }
+        }
+        return tempGraph;
+    }
+    
     void Dikstra(String from, String to) {
         Dijkstra dijkstra = new Dijkstra(Dijkstra.Element.EDGE, "result", "length");
+        
         dijkstra.init(graph);
         dijkstra.setSource(graph.getNode(from));
         dijkstra.compute();
