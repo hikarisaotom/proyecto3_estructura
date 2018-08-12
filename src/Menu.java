@@ -31,6 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.graphstream.algorithm.BetweennessCentrality;
+import org.graphstream.algorithm.Dijkstra;
 //import javax.swing.*;
 //import javax.swing.border.*;
 //import org.graphstream.algorithm.generator.BarabasiAlbertGenerator;
@@ -70,7 +71,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_time = new javax.swing.JLabel();
         btn_iniciar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btn_recorrido = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -154,13 +154,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("copiar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -187,10 +180,6 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jc_there, 0, 246, Short.MAX_VALUE)
                     .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(102, 102, 102))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,9 +198,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(lbl_time))
                 .addGap(38, 38, 38)
                 .addComponent(btn_iniciar)
-                .addGap(33, 33, 33)
-                .addComponent(jButton2)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Particular", jPanel3);
@@ -620,10 +607,6 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jc_diagnosticActionPerformed
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        CopyGraph();
-    }//GEN-LAST:event_jButton2MouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -736,6 +719,7 @@ public class Menu extends javax.swing.JFrame {
                             if (!(graph.getEdge(data[2]) != null)) {
                                 Random ran = new Random();
                                 int weigth = ran.nextInt(15) + 1;
+
                                 graph.addEdge(data[2], data[0], data[1]).addAttribute("length", weigth);
                                 graph.getNode(data[0]).setAttribute("estate", false);
                                 graph.getNode(data[1]).setAttribute("estate", false);
@@ -765,6 +749,15 @@ public class Menu extends javax.swing.JFrame {
             graph.getNode(crash).setAttribute("ui.class", "marked_closed");
             graph.getNode(crash).setAttribute("estate", true);
         }
+        graph.getNode("pedregal").setAttribute("ui.class", "marked_closed");
+        graph.getNode("pedregal").setAttribute("estate", true);
+        graph.getNode("B").setAttribute("ui.class", "marked_default");
+        graph.getNode("B").setAttribute("estate", false);
+        graph.getNode("C").setAttribute("ui.class", "marked_default");
+        graph.getNode("C").setAttribute("estate", false);
+        graph.getNode("A").setAttribute("ui.class", "marked_default");
+        graph.getNode("A").setAttribute("estate", false);
+
     }
 
     ArrayList<Node> CrashGenerated(boolean showText) {
@@ -784,11 +777,46 @@ public class Menu extends javax.swing.JFrame {
     }
 
     public void Dikstra(String from, String to) {
-        admHilo hilo1 = new admHilo(lbl_time, jc_here, jc_there, btn_iniciar, graph);
-        hilo1.Dikstra(from, to);
-        hilo1.start();
-        graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
-        graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
+        SetDefault();
+        ArrayList<Node> closed = CrashGenerated(false);
+        ArrayList<Node> alternativeRute = new ArrayList();
+        admHilo threadGraph = new admHilo(lbl_time, jc_here, jc_there, btn_iniciar, graph);
+        threadGraph.Dikstra(from, to);
+        if (closed.contains(graph.getNode(from))) {
+            JOptionPane.showMessageDialog(null, "La posicion de partida se encuentra cerrada, no se puede calcular la ruta ", "Punto sin salida.", JOptionPane.ERROR_MESSAGE);
+            SetDefault();
+        } else {
+            boolean useAlternativeRute = false;
+            Node nodeFrom = graph.getNode(from);
+            Node nodeTo = graph.getNode(to);
+            ArrayList<Node> tempVertex = threadGraph.getVertex();
+            for (Node node : tempVertex) {
+                if (closed.contains(node) && node != nodeFrom && node != nodeTo) {
+                    JOptionPane.showMessageDialog(null, "Lo sentimos, la ruta mas corta tiene una o mas calles cerradas, trataremos de calcular una ruta alterna", "Calle cerrada en el camino", JOptionPane.ERROR_MESSAGE);
+                    useAlternativeRute = true;
+                    break;
+                }
+            }
+
+            if (!useAlternativeRute) {
+                if (closed.contains(nodeTo)) {
+                    JOptionPane.showMessageDialog(null, "Tu destino se encuentra bloqueado, pero el camino esta libre, puedes caminar hasta el final de esa ruta", "Malas noticias", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                ArrayList<Node> tempVertexcopy = CopyGraph();
+                if(tempVertexcopy.size()>0){
+                    for (Node node : tempVertexcopy) {
+                    alternativeRute.add(graph.getNode(node.getId()));
+                     threadGraph.setVertex(alternativeRute);
+                }
+                }else{
+                     threadGraph.setVertex(alternativeRute);
+                }
+            }
+            threadGraph.start();
+            graph.getNode(jc_here.getSelectedItem().toString()).setAttribute("ui.class", "marked");
+            graph.getNode(jc_there.getSelectedItem().toString()).setAttribute("ui.class", "marked");
+        }
 
     }
 
@@ -864,16 +892,15 @@ public class Menu extends javax.swing.JFrame {
         }
     }
 
-    public void CreateAlternativeRute() {
-
-    }
-
-    public Graph CopyGraph() {
+    public ArrayList<Node> CopyGraph() {
         Graph tempGraph = new SingleGraph("Temporal Graph");
+        tempGraph.addAttribute("ui.stylesheet", styleSheet);
         for (Node node : graph) {
             if (!(boolean) node.getAttribute("estate")) {
+
                 tempGraph.addNode(node.getId());
                 tempGraph.getNode(node.getId()).addAttribute("ui.label", node.getId());
+                tempGraph.getNode(node.getId()).addAttribute("estate", (Object) node.getAttribute("estate"));
             }
         }
         for (Edge edge : graph.getEachEdge()) {
@@ -882,16 +909,12 @@ public class Menu extends javax.swing.JFrame {
             if (tempGraph.getNode(nodeLeft.getId()) != null && tempGraph.getNode(nodeRight.getId()) != null) {
                 tempGraph.addEdge(edge.getId(), nodeLeft.getId(), nodeRight.getId());
                 tempGraph.getEdge(edge.getId()).addAttribute("ui.label", (Object) edge.getAttribute("length"));
-            } else {
-                System.out.println("LOS QUE NO SE AGREGARON: ");
-                System.out.println("ARISTA" + edge.getId());
-                System.out.println("NODO IZQUIERDA" + nodeLeft.getId());
-                System.out.println("NODO DERECHA" + nodeRight.getId());
+                tempGraph.getEdge(edge.getId()).addAttribute("length", (Object) edge.getAttribute("length"));
             }
         }
-
-        tempGraph.display();
-        return tempGraph;
+        admHilo threadCopy = new admHilo(lbl_time, jc_here, jc_there, btn_iniciar, tempGraph);
+        threadCopy.Dikstra(jc_here.getSelectedItem().toString(), jc_there.getSelectedItem().toString());
+        return threadCopy.getVertex();
     }
     Graph graph;
     protected String styleSheet
@@ -939,14 +962,16 @@ public class Menu extends javax.swing.JFrame {
             + "text-size: 15px;"
             + "   size: 3px;"
             + "}"
-            + "edge.highlight1 {  "
+            + "edge.highlight_original {  "
             + "   fill-color: green;\n"
             + "text-color: black;"
             + "text-size: 15px;"
             + "   size: 3px;"
             + "}"
-            + "edge.highlightalter {  "
-            + "   fill-color: yellow;\n"
+            + "edge.highlight_alternative {  "
+            + "fill-color: yellow;\n"
+            + "text-color: black;"
+            + "text-size: 15px;"
             + "   size: 3px;"
             + "}"
             + "edge .notintree {"
@@ -968,7 +993,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btn_iniciar;
     private javax.swing.JButton btn_recorrido;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
