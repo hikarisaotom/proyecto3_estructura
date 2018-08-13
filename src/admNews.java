@@ -11,7 +11,7 @@ public class admNews extends Thread {
     private JLabel lbl_showNews;
     private JPanel jp_showNews;
     private String message;
-    private int x = 20, y = 10;
+    private int x = 0, y = 0;
 
     /* 
  Descripción: Constructor de la clase admNews, reservara un espacio en memoria para el objeto que se esta instanciando.
@@ -24,7 +24,7 @@ public class admNews extends Thread {
         this.lbl_showNews = lbl_showNews;
         this.message = Message;
         this.jp_showNews = jp_showNews;
-        x = (jp_showNews.getWidth() / 2) - 25;
+        x = lbl_showNews.getX();
         y = 0;
         lbl_showNews.setLocation(x, y);
         lbl_showNews.setText(this.message);

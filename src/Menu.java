@@ -37,7 +37,10 @@ Errores: N/A*/
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(this);
-        admNews threadStart = new admNews(lbl_showNewsStart, "hello", jp_newStart);
+        String Datos = "<html><body><center>Hace mucho...mucho tiempo<br>en una universidad privada<br>"
+                + "Habian uns jovenes con una clase"
+                + "<br> y un proyecto.....<br> FEO EL QUE LO LEA</center></body></html>";
+        admNews threadStart = new admNews(lbl_showNewsStart, Datos, jp_newStart);
         threadStart.start();
 
     }
@@ -125,6 +128,7 @@ Errores: N/A*/
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/casa.png"))); // NOI18N
         jLabel1.setText("Locación");
 
         jc_here.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
@@ -149,9 +153,11 @@ Errores: N/A*/
         });
 
         jLabel2.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/marcador-de-posicion.png"))); // NOI18N
         jLabel2.setText("Destino");
 
         jLabel3.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cronografo.png"))); // NOI18N
         jLabel3.setText("Tiempo estimado de viaje");
 
         lbl_time.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
@@ -160,6 +166,7 @@ Errores: N/A*/
         btn_iniciar.setBackground(new java.awt.Color(255, 255, 255));
         btn_iniciar.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
         btn_iniciar.setForeground(new java.awt.Color(0, 153, 153));
+        btn_iniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/destino.png"))); // NOI18N
         btn_iniciar.setText("Start");
         btn_iniciar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -181,40 +188,39 @@ Errores: N/A*/
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lbl_time, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(btn_iniciar))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jc_there, 0, 246, Short.MAX_VALUE)
-                            .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 12, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_time, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addContainerGap())))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(btn_iniciar)
-                .addGap(0, 161, Short.MAX_VALUE))
+                            .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jc_here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jc_there, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(jc_there, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_time)
@@ -253,10 +259,12 @@ Errores: N/A*/
 
         jLabel7.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/carretera.png"))); // NOI18N
         jLabel7.setText("Detalles del Diagnostico");
 
         jLabel12.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/direccion1.png"))); // NOI18N
         jLabel12.setText("Opciones");
 
         lbl_description.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
@@ -275,14 +283,13 @@ Errores: N/A*/
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(111, 111, 111)
                                 .addComponent(jLabel12))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
-                                .addComponent(lbl_description, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_description, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -317,22 +324,21 @@ Errores: N/A*/
         jp_showNews.setLayout(jp_showNewsLayout);
         jp_showNewsLayout.setHorizontalGroup(
             jp_showNewsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_showNewsLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(lbl_showNews, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_showNewsLayout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
+                .addComponent(lbl_showNews, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
         );
         jp_showNewsLayout.setVerticalGroup(
             jp_showNewsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_showNewsLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(lbl_showNews, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lbl_showNews, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
         );
 
         jd_Graph.getContentPane().add(jp_showNews, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 370, 200));
 
         jLabel9.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/direccion.png"))); // NOI18N
         jLabel9.setText("Las calles cerradas el dia de hoy son: ");
         jLabel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jd_Graph.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 370, 30));
@@ -404,12 +410,14 @@ Errores: N/A*/
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pin.png"))); // NOI18N
         jLabel6.setText("Nombre ");
 
         txt_newnode.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
 
         btn_CreateVertex.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         btn_CreateVertex.setForeground(new java.awt.Color(0, 153, 153));
+        btn_CreateVertex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/marcador-de-posicion (1).png"))); // NOI18N
         btn_CreateVertex.setText("Crear");
         btn_CreateVertex.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -434,10 +442,11 @@ Errores: N/A*/
                         .addGap(59, 59, 59)
                         .addComponent(jLabel6)
                         .addGap(33, 33, 33)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_CreateVertex, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_newnode, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(75, Short.MAX_VALUE))
+                        .addComponent(txt_newnode, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(btn_CreateVertex, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -448,19 +457,21 @@ Errores: N/A*/
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txt_newnode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                .addGap(58, 58, 58)
                 .addComponent(btn_CreateVertex)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Nodo", jPanel2);
+        jTabbedPane1.addTab("Vertice", jPanel2);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pin.png"))); // NOI18N
         jLabel4.setText("Desde");
 
         jLabel5.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pin.png"))); // NOI18N
         jLabel5.setText("Hasta");
 
         jc_newhere.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
@@ -470,7 +481,8 @@ Errores: N/A*/
         btn_CreateRute.setBackground(new java.awt.Color(255, 255, 255));
         btn_CreateRute.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         btn_CreateRute.setForeground(new java.awt.Color(0, 153, 153));
-        btn_CreateRute.setText("crear");
+        btn_CreateRute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/panel.png"))); // NOI18N
+        btn_CreateRute.setText("Crear");
         btn_CreateRute.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_CreateRuteMouseClicked(evt);
@@ -500,17 +512,15 @@ Errores: N/A*/
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jc_newhere, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jc_newthere, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(btn_CreateRute, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jc_newthere, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_CreateRute, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addComponent(jLabel15)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -521,13 +531,13 @@ Errores: N/A*/
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jc_newhere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jc_newthere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(42, 42, 42)
                 .addComponent(btn_CreateRute)
-                .addGap(25, 25, 25))
+                .addGap(24, 24, 24))
         );
 
         jTabbedPane1.addTab("Arista", jPanel1);
@@ -548,6 +558,7 @@ Errores: N/A*/
         btn_Start.setBackground(new java.awt.Color(255, 255, 255));
         btn_Start.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
         btn_Start.setForeground(new java.awt.Color(0, 153, 153));
+        btn_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/tranvia.png"))); // NOI18N
         btn_Start.setText("Empezar");
         btn_Start.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -559,7 +570,7 @@ Errores: N/A*/
                 btn_StartActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 153, -1));
+        getContentPane().add(btn_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 421, 160, 30));
 
         jp_newStart.setBackground(new java.awt.Color(0, 204, 204));
         jp_newStart.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
@@ -691,22 +702,20 @@ Errores: N/A*/
         ArrayList<Node> closed = CrashGenerated(false);
         String closed01 = "";
         for (int i = 0; i < closed.size(); i++) {
-            closed01 += closed.get(i).getId() + "<br>";
+            closed01 += "<div style='text-align: center;'>" + closed.get(i).getId() + "<br></center></div>";
         }
-
+        lbl_showNews.setText("");
         try {
-            if (theradNews.isAlive() != true) {
-                String Datos = "<html><body><center>" + closed01 + "<br></center></body></html>";
+            if (theradNews.isAlive() == true) {
+                String Datos = "<html><body> <center>" + closed01 + "<br></center></body></html>";
+                System.out.println(Datos);
                 theradNews.SetMessage(Datos);
             }
-
         } catch (Exception e) {
             String Datos = "<html><body><center>" + closed01 + "<br></center></body></html>";
             theradNews = new admNews(lbl_showNews, Datos, jp_showNews);
             theradNews.start();
-
         }
-
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     /* 
