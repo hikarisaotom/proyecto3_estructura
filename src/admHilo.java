@@ -1,5 +1,8 @@
-
-import java.awt.List;
+/* Titulo: Proyecto #3 Resolución de problemas aplicando teoría de Grafos.
+ Proposito: Crear una aplicación útil para la resolución de problemas relaciohados con el transito
+            dentro de una ciudad implementando la teoria de grafos.
+ Clase: CCC209 – Q3 – 2018
+ Author: Claudia Cortés*/
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,7 +12,6 @@ import javax.swing.JOptionPane;
 import org.graphstream.algorithm.Dijkstra;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
-import org.graphstream.graph.implementations.SingleGraph;
 
 public class admHilo extends Thread {
 
@@ -23,6 +25,15 @@ public class admHilo extends Thread {
     private JButton btn_iniciar;
     private Graph graph;
 
+    /* 
+Descripción: Constructor de la clase que administra el hilo del recorrido.
+Params: JLabel lbl_time, sera la etiqueta en la que mostraremos el tiempo total/el tiempo que falta para llegar al destino
+    JComboBox jc_here, comboBox que contiene nuestro punto de partida.
+    JComboBox jc_there, comboBox que contiene nuestro destino.
+    JButton btn_iniciar, Boton que inicializara el hilo.
+    Graph graph, Grafo que contiene nuestra ruta a seguir
+Retorna: N/A
+Errores: N/A*/
     public admHilo(JLabel lbl_time, JComboBox jc_here, JComboBox jc_there, JButton btn_iniciar, Graph graph) {
         this.lbl_time = lbl_time;
         this.jc_here = jc_here;
@@ -33,6 +44,11 @@ public class admHilo extends Thread {
         avance = true;
     }
 
+    /* 
+Descripción: Devuelve  todos los elementos del grafo a su estado original 
+Params: N/A
+Retorna: N/A
+Errores: N/A*/
     void SetDefault() {
         for (Node node : graph) {
             if (!((boolean) node.getAttribute("estate"))) {
@@ -52,16 +68,32 @@ public class admHilo extends Thread {
         }
 
     }
+
+    /* 
+Descripción: Retorna el arreglo de vertices que forman la ruta mas cercana entre dos puntos del grafo. 
+Params: N/A
+Retorna: ArrayList<Node> vertex, el arreglo de vertices de la ruta mas corta
+Errores: N/A*/
     public ArrayList<Node> getVertex() {
         return vertex;
     }
 
+    /* 
+Descripción: Actualiza el valor el arreglo de vertices que forman la ruta mas cercana entre dos puntos del grafo. 
+Params: ArrayList<Node> vertex, será la nueva ruta a seguir dentro del grafo.
+Retorna: N/A
+Errores: */
     public void setVertex(ArrayList<Node> vertex) {
         this.vertex = vertex;
         PaintVertex("highlight_alternative");
         CalculateTime();
     }
 
+    /* 
+Descripción: Calcula el tiempo total que se tardara el usuario en transportarse desde e únto A hasta el punto B
+Params: N/A
+Retorna: N/A
+Errores: N/A*/
     public void CalculateTime() {
         timeTotal = 0;
         for (int i = 0; i < vertex.size(); i++) {
@@ -72,6 +104,11 @@ public class admHilo extends Thread {
         lbl_time.setText(timeTotal + "");
     }
 
+    /* 
+Descripción: Cambiara el diseño de los vertices que forman el camino de la ruta mas corta dependiendo de su recorrido
+Params: String style, sera el estilo que se aplicara a los vertices
+Retorna: N/A
+Errores: N/A*/
     public void PaintVertex(String style) {
         for (int i = 0; i < vertex.size(); i++) {
             if (i != vertex.size() - 1) {
@@ -81,6 +118,12 @@ public class admHilo extends Thread {
 
     }
 
+    /* 
+Descripción: Determina la ruta mas corta entre dos puntos y genera un arreglo con los mismos
+Params: String from, el nombre del vertice el que se encuentra actualmente
+        String to, nombre del vertice al cual se desea mobilizar 
+Retorna: N/A
+Errores: El manejo de errores del metodo que determina la ruta mas corta se encuentra ya validado en la clase Dikstra*/
     void Dikstra(String from, String to) {
         Dijkstra dijkstra = new Dijkstra(Dijkstra.Element.EDGE, "result", "length");
         dijkstra.init(graph);
@@ -88,7 +131,7 @@ public class admHilo extends Thread {
         dijkstra.compute();
         vertex = new ArrayList<Node>();
         timeTotal = 0;
-       
+
         for (Node node : dijkstra.getPathNodes(graph.getNode(to))) {
             node.addAttribute("ui.class", "marked_visited");
             vertex.add(0, node);
@@ -99,6 +142,11 @@ public class admHilo extends Thread {
         PaintVertex("highlight_original");
     }
 
+    /* 
+ Descripción: Ejecuta el movimiento animado del recorrido dentro del grafo 
+ Params: N/A
+Retorna: N/*A
+ Errores: N/A*/
     @Override
     public void run() {
         jc_here.disable();
