@@ -659,11 +659,20 @@ Params: N/A
 Retorna:N/A
 Errores: N/A*/
     private void btn_CreateVertexMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CreateVertexMouseClicked
-        graph.addNode(txt_newnode.getText());
-        graph.getNode(txt_newnode.getText()).setAttribute("estate", false);
-        LoadCombo();
-        SetDefault();
-        txt_newnode.setText("");
+        if (graph.getNode(txt_newnode.getText()) == null) {
+            graph.addNode(txt_newnode.getText());
+            graph.getNode(txt_newnode.getText()).setAttribute("estate", false);
+            LoadCombo();
+            SetDefault();
+            txt_newnode.setText("");
+            JOptionPane.showMessageDialog(null, "Calle creada exitosamente", "Calle Creada", JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "La calle  deseada ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+            SetDefault();
+            txt_newnode.setText("");
+        }
+
     }//GEN-LAST:event_btn_CreateVertexMouseClicked
 
     private void btn_CreateRuteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CreateRuteMouseEntered
@@ -747,11 +756,11 @@ Errores: N/A*/
                 node.setAttribute("ui.class", "marked_articulation");
             }
             Comparative(Articulation(false), CrashGenerated(false));
-            
+
         } else {
             lbl_description.setText("Estaciones de tren de la ciudad: ");
             txta_articulation.setText("Estaciones de tren más cortas\n que conectan toda la ciudad");
-             SetDefault();
+            SetDefault();
             Prim();
             try {
                 DFS();
@@ -1122,7 +1131,7 @@ Errores: N/A*/
             }
         }
         if (noAcces.length() > 0) {
-            noAcces = "\n\n NO HAY ACCESO A CIERTAS\n PARTES DE LA CIUDAD HOY"+noAcces;
+            noAcces = "\n\n NO HAY ACCESO A CIERTAS\n PARTES DE LA CIUDAD HOY" + noAcces;
             txta_articulation.setText(noAcces);
         } else {
             noAcces += "\n\n Ninguna calle que deje incomunicada\n la ciudad se encuentra cerrada hoy";
