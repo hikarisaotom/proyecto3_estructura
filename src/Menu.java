@@ -37,11 +37,15 @@ Errores: N/A*/
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(this);
-        String Datos = "<html><body><center>Hace mucho...mucho tiempo<br>en una universidad privada<br>"
-                + "Habian uns jovenes con una clase"
-                + "<br> y un proyecto.....<br> FEO EL QUE LO LEA</center></body></html>";
+        String Datos = "<html><body><center>Sistema de control de trafico:<br>"
+                + "<br> Dadas las constantes construcciónes en la ciudad,<br>"
+                + " transportarse de un lugar a otro <br>aveces resulta complicado..<br>"
+                + " ocasionalmente las calles se encuentran cerradas, <br>y es dificil determinar cual es el camino mas rapido para llegar</center></body></html>";
         admNews threadStart = new admNews(lbl_showNewsStart, Datos, jp_newStart);
         threadStart.start();
+        btn_iniciar.show(false);
+        jc_diagnostic.show(false);
+        jmi_CreateRute.show(false);
 
     }
 
@@ -61,6 +65,9 @@ Errores: N/A*/
         lbl_time = new javax.swing.JLabel();
         btn_iniciar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        lbl_showKMS = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txta_articulation = new javax.swing.JTextArea();
@@ -77,7 +84,8 @@ Errores: N/A*/
         jmi_Open = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jmi_Create = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmi_CreateRute = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jd_CreateNewRute = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -93,11 +101,46 @@ Errores: N/A*/
         btn_CreateRute = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jd_Help = new javax.swing.JDialog();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jp_work = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
         btn_Start = new javax.swing.JButton();
         jp_newStart = new javax.swing.JPanel();
         lbl_showNewsStart = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
 
+        jd_Graph.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jd_Graph.setTitle("Rutas");
         jd_Graph.setBackground(new java.awt.Color(51, 51, 51));
         jd_Graph.setBounds(new java.awt.Rectangle(0, 0, 100000, 100000));
@@ -124,6 +167,11 @@ Errores: N/A*/
 
         jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane2.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jTabbedPane2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane2StateChanged(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -182,32 +230,51 @@ Errores: N/A*/
         jLabel8.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel8.setText("Mins.");
 
+        jLabel17.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/carretera.png"))); // NOI18N
+        jLabel17.setText("Distancia a Recorrer");
+
+        jLabel18.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel18.setText("KMS");
+
+        lbl_showKMS.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        lbl_showKMS.setText("N/A");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_time, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jc_there, 0, 246, Short.MAX_VALUE)
+                    .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lbl_time, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(lbl_showKMS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel18)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(btn_iniciar))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jc_there, 0, 246, Short.MAX_VALUE)
-                            .addComponent(jc_here, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(128, 128, 128)
+                .addComponent(btn_iniciar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,9 +292,14 @@ Errores: N/A*/
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_time)
                     .addComponent(jLabel8))
-                .addGap(61, 61, 61)
+                .addGap(44, 44, 44)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(lbl_showKMS)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(btn_iniciar)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
 
         jTabbedPane2.addTab("Particular", jPanel3);
@@ -311,7 +383,7 @@ Errores: N/A*/
 
         jTabbedPane2.addTab("General", jPanel4);
 
-        jd_Graph.getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 370, -1));
+        jd_Graph.getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 370, 380));
 
         jp_showNews.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jp_showNews.setOpaque(false);
@@ -386,21 +458,36 @@ Errores: N/A*/
         jmi_Create.setText("Crear");
         jmi_Create.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
 
-        jMenuItem2.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuItem2.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        jMenuItem2.setText("Crear Ruta");
-        jMenuItem2.setOpaque(true);
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jmi_CreateRute.setBackground(new java.awt.Color(255, 255, 255));
+        jmi_CreateRute.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jmi_CreateRute.setText("Crear Ruta");
+        jmi_CreateRute.setOpaque(true);
+        jmi_CreateRute.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jmi_CreateRuteActionPerformed(evt);
             }
         });
-        jmi_Create.add(jMenuItem2);
+        jmi_Create.add(jmi_CreateRute);
 
         jMenuBar1.add(jmi_Create);
 
+        jMenu1.setText("Ayuda");
+        jMenu1.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         jd_Graph.setJMenuBar(jMenuBar1);
 
+        jd_CreateNewRute.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jd_CreateNewRute.setBackground(new java.awt.Color(255, 255, 255));
         jd_CreateNewRute.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -549,6 +636,209 @@ Errores: N/A*/
         jLabel13.setOpaque(true);
         jd_CreateNewRute.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 320));
 
+        jd_Help.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jTabbedPane3.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+
+        jp_work.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("/*\n\t\t\tNOTAS:\nTIEMPO: Dado el trafico y las horas \"pico\" de la ciudad, el tiempo\nentre un punto y otro puede variar, se generara \nun calculo para el nuevo tiempo cada vez que se genere un grafo.\n\nCALLES CERRADAS: Dadas las construcciones, accidentes \no cualquier otro suceso que pueda suceder en una ciudad\npor cada grafo generado, se calculara una cantidad \nde calles cerradas y estás se asiganaran aleatoriamente \npor toda la ciudad.\n\n*/\n\n\t\t*FUNCIONAMIENTO*/\nDeterminar el camino entre dos puntos A,B:\nEn la pantallaprincipal, en la opción \"Particular\" \nseleccione de los combobox locación y destino los puntos\n, luego presione el botón \"Start\", entonces iniciara la \nsimulación del recorrido.\nNOTA: si el camino más corto(verde) se encuentra\nbloqueado,el sistema tratara de calcular una ruta \nalterna (Amarillo), en el caso de no encontrar una, \nse notificara que no hay acceso a ese punto de mapa. \n*******************************************************\nHabilitar nuevas Rutas:\nEn el menú superior encontrar la opción \"Crear\" \nal seleccionar esta opción, se desplegara una ventana que:\nA)Permite crear nuevos vertices.\nB)Crear nuevas Aristas que habiliten un camino \nPROVISIONAL entre los puntos.\n*******************************************************\nGenerar un informe General:\nEn la pantallaprincipal, en la opción \"General\",\nencontrará un ComboBox con las opciones:\nA)Posibles calles que dejaran incomunicada la ciudad:\n\tPuntos de articulación del mapa.\nB)Calles Cerradas el dia de hoy\n\tCalles cerradas en el dia.\nC)Mapa de Estaciones de Tren de la ciudad \n\tMapa de la ruta más corta que pasa \n\tpor todos los vertices.\nD)Comparacion calles cerradas-calles que\n\t causan incomunicacion:\n\tLista de puntos de articulación que \n\t\testan cerrados.\n");
+        jScrollPane2.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout jp_workLayout = new javax.swing.GroupLayout(jp_work);
+        jp_work.setLayout(jp_workLayout);
+        jp_workLayout.setHorizontalGroup(
+            jp_workLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_workLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE))
+        );
+        jp_workLayout.setVerticalGroup(
+            jp_workLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+        );
+
+        jTabbedPane3.addTab("Funcionamiento", jp_work);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel20.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel20.setText("Vertices Rojos");
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 153, 51));
+        jLabel21.setText("Vertices Verdes");
+        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
+
+        jLabel22.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 102, 0));
+        jLabel22.setText("Vertices Naranjas");
+        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel23.setText("Vertices Amarillos");
+        jPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
+
+        jLabel24.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(0, 0, 102));
+        jLabel24.setText("Vertices Azules");
+        jPanel5.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel25.setText("Vertices que se encuentran cerrados, obstruyen el camino");
+        jPanel5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+
+        jLabel26.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel26.setText("Puntos de articulación que dejan ciertas partes del mapa");
+        jPanel5.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel27.setText("Vertices de destino y posición Actual.");
+        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
+
+        jLabel28.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel28.setText("Vertices que se encuentran en el, o los caminos  camino más cortos.");
+        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+
+        jLabel29.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel29.setText("Vertices abiertos por los que se puede transitar, no representan");
+        jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
+
+        jLabel30.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel30.setText("no permiten avanzar. ");
+        jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
+
+        jLabel31.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel31.setText("incomunicadas.");
+        jPanel5.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
+
+        jLabel32.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel32.setText("ningún punto significativo o de peligro dentro del mapa.");
+        jPanel5.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
+
+        jLabel33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jPanel5.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 450, 60));
+
+        jLabel34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jPanel5.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 420, 50));
+
+        jLabel35.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jPanel5.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 420, 40));
+
+        jLabel37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jPanel5.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 420, 40));
+
+        jLabel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jPanel5.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 450, 40));
+
+        jTabbedPane3.addTab("Simbologia-Vertices", jPanel5);
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel39.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel39.setText("Aristas Rojas");
+
+        jLabel40.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(0, 153, 51));
+        jLabel40.setText("Aristas Verdes");
+
+        jLabel41.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel41.setText("Aristas Amarillas");
+
+        jLabel42.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(255, 102, 0));
+        jLabel42.setText("Aristas  Naranjas");
+
+        jLabel43.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel43.setText("Representa el camino más corto entre dos puntos");
+        jLabel43.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+
+        jLabel44.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel44.setText("Representan los tramos de camino recorridos");
+        jLabel44.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+
+        jLabel45.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel45.setText("Representa el camino más corto entre todos los puntos del mapa");
+        jLabel45.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+
+        jLabel46.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel46.setText("Representa el camino alterno más corto entre dos puntos");
+        jLabel46.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(154, 154, 154)
+                                .addComponent(jLabel40))
+                            .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(151, 151, 151)
+                                .addComponent(jLabel41))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(161, 161, 161)
+                                .addComponent(jLabel42))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(226, 226, 226)
+                        .addComponent(jLabel39)))
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel42)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Simbologia-Aristas", jPanel6);
+
+        javax.swing.GroupLayout jd_HelpLayout = new javax.swing.GroupLayout(jd_Help.getContentPane());
+        jd_Help.getContentPane().setLayout(jd_HelpLayout);
+        jd_HelpLayout.setHorizontalGroup(
+            jd_HelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_HelpLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane3)
+                .addContainerGap())
+        );
+        jd_HelpLayout.setVerticalGroup(
+            jd_HelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane3)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Proyecto#3_ClaudiaCortes");
         setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
@@ -558,7 +848,7 @@ Errores: N/A*/
         btn_Start.setBackground(new java.awt.Color(255, 255, 255));
         btn_Start.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
         btn_Start.setForeground(new java.awt.Color(0, 153, 153));
-        btn_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/tranvia.png"))); // NOI18N
+        btn_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/coche.png"))); // NOI18N
         btn_Start.setText("Empezar");
         btn_Start.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -570,35 +860,23 @@ Errores: N/A*/
                 btn_StartActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 421, 160, 30));
+        getContentPane().add(btn_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 160, 30));
 
         jp_newStart.setBackground(new java.awt.Color(0, 204, 204));
         jp_newStart.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jp_newStart.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_showNewsStart.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
+        jp_newStart.add(lbl_showNewsStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 340, 210));
 
-        javax.swing.GroupLayout jp_newStartLayout = new javax.swing.GroupLayout(jp_newStart);
-        jp_newStart.setLayout(jp_newStartLayout);
-        jp_newStartLayout.setHorizontalGroup(
-            jp_newStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_newStartLayout.createSequentialGroup()
-                .addGap(247, 247, 247)
-                .addComponent(lbl_showNewsStart)
-                .addContainerGap(393, Short.MAX_VALUE))
-        );
-        jp_newStartLayout.setVerticalGroup(
-            jp_newStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_newStartLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(lbl_showNewsStart)
-                .addContainerGap(343, Short.MAX_VALUE))
-        );
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/mapa1.png"))); // NOI18N
+        jp_newStart.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 290, 304));
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/background1small.jpg"))); // NOI18N
+        jLabel19.setText("jLabel19");
+        jp_newStart.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 410));
 
         getContentPane().add(jp_newStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 410));
-
-        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel16.setOpaque(true);
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 640, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -645,19 +923,26 @@ Errores: N/A*/
 Descripción: Crea una nueva ruta para los vertices del grafo 
 Params: N/A
 Retorna: N/A
-Errores: N/A*/
+Errores: Si la arista ya existe, se notificara al usuario de esto y no se agregara al grafo*/
     private void btn_CreateRuteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CreateRuteMouseClicked
+        BetweennessCentrality bcb = new BetweennessCentrality();
+        bcb.setWeightAttributeName("weight");
         if (graph.getNode(jc_newhere.getSelectedItem().toString()) != null && graph.getNode(jc_newhere.getSelectedItem().toString()) != null) {
             Random ran = new Random();
-
             Node nodexTo = graph.getNode(jc_newhere.getSelectedItem().toString());
             Node nodexFrom = graph.getNode(jc_newthere.getSelectedItem().toString());
             String name = nodexTo.getId() + nodexFrom.getId();
             String name2 = nodexFrom.getId() + nodexTo.getId();
             if (graph.getEdge(name) == null && graph.getEdge(name2) == null && nodexTo != nodexFrom) {
-                graph.addEdge(name, nodexTo, nodexFrom).addAttribute("length", ran.nextInt(15) + 1);
+                int weigth = ran.nextInt(15) + 1;
+                int kilometers = ran.nextInt(15) + 1;
+                graph.addEdge(name, nodexTo, nodexFrom).addAttribute("length", weigth);
+                graph.getEdge(name).setAttribute("kilometers", kilometers);
+                bcb.setWeight(nodexTo, nodexFrom, weigth);
                 LoadCombo();
                 SetDefault();
+                bcb.init(graph);
+                bcb.compute();
                 JOptionPane.showMessageDialog(null, "Ruta Creada Exitosamente", "Ruta Creada", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "La ruta deseada ya existe, o hace referencia a si misma", "Error", JOptionPane.ERROR_MESSAGE);
@@ -668,7 +953,7 @@ Errores: N/A*/
 Descripción: Crea un nuevo vertice y lo agrega al grafo 
 Params: N/A
 Retorna:N/A
-Errores: N/A*/
+Errores: Si el Vertice ya existe no se agregara al grafo y se notificara de esto al usuario*/
     private void btn_CreateVertexMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CreateVertexMouseClicked
         if (graph.getNode(txt_newnode.getText()) == null) {
             graph.addNode(txt_newnode.getText());
@@ -699,6 +984,8 @@ Errores: N/A*/
         starGraph();
         display();
         btn_iniciar.show();
+        jc_diagnostic.show();
+        jmi_CreateRute.show();
         ArrayList<Node> closed = CrashGenerated(false);
         String closed01 = "";
         for (int i = 0; i < closed.size(); i++) {
@@ -708,7 +995,6 @@ Errores: N/A*/
         try {
             if (theradNews.isAlive() == true) {
                 String Datos = "<html><body> <center>" + closed01 + "<br></center></body></html>";
-                System.out.println(Datos);
                 theradNews.SetMessage(Datos);
             }
         } catch (Exception e) {
@@ -724,18 +1010,18 @@ Params: N/A
 Retorna: N/A
 Errores: N/A*/
     private void btn_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StartActionPerformed
-        btn_iniciar.show(false);
+
     }//GEN-LAST:event_btn_StartActionPerformed
     /* 
 Descripción: Evento que desplagara una nueva ventana para crear nuevas rutas y vertices
 Params: N/A
 Retorna:N/A
 Errores: N/A*/
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jmi_CreateRuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CreateRuteActionPerformed
         jd_CreateNewRute.show();
         jd_CreateNewRute.pack();
         jd_CreateNewRute.setLocationRelativeTo(jd_Graph);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jmi_CreateRuteActionPerformed
 
     private void jc_diagnosticItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_diagnosticItemStateChanged
 
@@ -799,6 +1085,24 @@ Errores: N/A*/
     private void btn_iniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_iniciarActionPerformed
+
+    private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
+
+    }//GEN-LAST:event_jTabbedPane2StateChanged
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+
+    }//GEN-LAST:event_jMenu1ActionPerformed
+    /* 
+Descripción: Evento click que mostrara la ventana de ayuda e instrucciones del sistema
+Params: N/A
+Retorna: N/A
+Errores: N/A*/
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        jd_Help.show(true);
+        jd_Help.pack();
+        jd_Help.setLocationRelativeTo(this.jd_Graph);
+    }//GEN-LAST:event_jMenu1MouseClicked
 
     /* 
 Descripción: Main del programa 
@@ -935,9 +1239,12 @@ Errores:N/A */
                         if (i == 2) {
 
                             if (!(graph.getEdge(data[2]) != null)) {
+
                                 Random ran = new Random();
                                 int weigth = ran.nextInt(15) + 1;
-                                graph.addEdge(data[2], data[0], data[1]).addAttribute("length", weigth);
+                                graph.addEdge(data[0] + "" + data[1], data[0], data[1]).addAttribute("length", weigth);
+                                int kilometers = Integer.parseInt(data[2]);
+                                graph.getEdge(data[0] + "" + data[1]).setAttribute("kilometers", kilometers);
                                 graph.getNode(data[0]).setAttribute("estate", false);
                                 graph.getNode(data[1]).setAttribute("estate", false);
                                 Node nodea = graph.getNode(data[0]);
@@ -951,6 +1258,7 @@ Errores:N/A */
             }
             sc.close();
         }//Fin del if 
+
         bcb.init(graph);
         bcb.compute();
 
@@ -1010,7 +1318,7 @@ Errores: N*A*/
         SetDefault();
         ArrayList<Node> closed = CrashGenerated(false);
         ArrayList<Node> alternativeRute = new ArrayList();
-        admHilo threadGraph = new admHilo(lbl_time, jc_here, jc_there, btn_iniciar, graph);
+        admHilo threadGraph = new admHilo(lbl_time, jc_here, jc_there, btn_iniciar, graph, lbl_showKMS);
         threadGraph.Dikstra(from, to);
         if (closed.contains(graph.getNode(from))) {
             JOptionPane.showMessageDialog(null, "La posicion de partida se encuentra cerrada, no se puede calcular la ruta ", "Punto sin salida.", JOptionPane.ERROR_MESSAGE);
@@ -1173,7 +1481,7 @@ Errores: N/A*/
                 tempGraph.getEdge(edge.getId()).addAttribute("length", (Object) edge.getAttribute("length"));
             }
         }
-        admHilo threadCopy = new admHilo(lbl_time, jc_here, jc_there, btn_iniciar, tempGraph);
+        admHilo threadCopy = new admHilo(lbl_time, jc_here, jc_there, btn_iniciar, tempGraph, lbl_showKMS);
         try {
             threadCopy.Dikstra(jc_here.getSelectedItem().toString(), jc_there.getSelectedItem().toString());
         } catch (Exception e) {
@@ -1272,24 +1580,58 @@ Errores: N/A*/
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JComboBox<String> jc_diagnostic;
     private javax.swing.JComboBox<String> jc_here;
     private javax.swing.JComboBox<String> jc_newhere;
@@ -1297,12 +1639,16 @@ Errores: N/A*/
     private javax.swing.JComboBox<String> jc_there;
     private javax.swing.JDialog jd_CreateNewRute;
     private javax.swing.JDialog jd_Graph;
+    private javax.swing.JDialog jd_Help;
     private javax.swing.JMenu jmi_Create;
+    private javax.swing.JMenuItem jmi_CreateRute;
     private javax.swing.JMenu jmi_Open;
     private javax.swing.JPanel jp_newStart;
     private javax.swing.JPanel jp_show;
     private javax.swing.JPanel jp_showNews;
+    private javax.swing.JPanel jp_work;
     private javax.swing.JLabel lbl_description;
+    private javax.swing.JLabel lbl_showKMS;
     private javax.swing.JLabel lbl_showNews;
     private javax.swing.JLabel lbl_showNewsStart;
     private javax.swing.JLabel lbl_time;

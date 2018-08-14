@@ -19,11 +19,13 @@ public class admHilo extends Thread {
     private boolean avance;
     private boolean live;
     private int timeTotal;
+    private int distanceTotal;
     private ArrayList<Node> vertex;
     private JComboBox jc_here;
     private JComboBox jc_there;
     private JButton btn_iniciar;
     private Graph graph;
+    private JLabel lbl_showKMS;
 
     /* 
 Descripción: Constructor de la clase que administra el hilo del recorrido.
@@ -34,7 +36,7 @@ Params: JLabel lbl_time, sera la etiqueta en la que mostraremos el tiempo total/
     Graph graph, Grafo que contiene nuestra ruta a seguir
 Retorna: N/A
 Errores: N/A*/
-    public admHilo(JLabel lbl_time, JComboBox jc_here, JComboBox jc_there, JButton btn_iniciar, Graph graph) {
+    public admHilo(JLabel lbl_time, JComboBox jc_here, JComboBox jc_there, JButton btn_iniciar, Graph graph, JLabel lbl_showKMS) {
         this.lbl_time = lbl_time;
         this.jc_here = jc_here;
         this.jc_there = jc_there;
@@ -42,6 +44,7 @@ Errores: N/A*/
         this.graph = graph;
         live = true;
         avance = true;
+        this.lbl_showKMS = lbl_showKMS;
     }
 
     /* 
@@ -96,12 +99,15 @@ Retorna: N/A
 Errores: N/A*/
     public void CalculateTime() {
         timeTotal = 0;
+        distanceTotal = 0;
         for (int i = 0; i < vertex.size(); i++) {
             if (i != vertex.size() - 1) {
                 timeTotal += (int) vertex.get(i).getEdgeBetween(vertex.get(i + 1)).getAttribute("length");
+                distanceTotal += (int) vertex.get(i).getEdgeBetween(vertex.get(i + 1)).getAttribute("kilometers");
             }
         }
         lbl_time.setText(timeTotal + "");
+        lbl_showKMS.setText(distanceTotal + "");
     }
 
     /* 
@@ -176,7 +182,8 @@ Retorna: N/*A
                                     Thread.sleep(3000);
                                     vertex.get(i).getEdgeBetween(vertex.get(i + 1)).addAttribute("ui.class", "highlight");
                                     timeTotal -= (int) vertex.get(i).getEdgeBetween(vertex.get(i + 1)).getAttribute("length");
-
+                                    distanceTotal -= (int) vertex.get(i).getEdgeBetween(vertex.get(i + 1)).getAttribute("kilometers");
+                                    lbl_showKMS.setText(distanceTotal + "");
                                     lbl_time.setText(timeTotal + "");
                                 } catch (InterruptedException ex) {
 
@@ -193,6 +200,7 @@ Retorna: N/*A
             jc_there.enable();
             btn_iniciar.show(true);
             lbl_time.setText("N/A");
+            lbl_showKMS.setText("N/A");
             SetDefault();
         }
     }
