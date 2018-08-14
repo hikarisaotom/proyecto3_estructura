@@ -12,7 +12,6 @@ public class admNews extends Thread {
     private JPanel jp_showNews;
     private String message;
     private int x = 0, y = 0;
-
     /* 
  Descripción: Constructor de la clase admNews, reservara un espacio en memoria para el objeto que se esta instanciando.
  Params:JLabel lbl_showNews, sera la etiqueta/label en la cual mostraremos el texto informativo.

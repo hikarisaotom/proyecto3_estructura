@@ -46,7 +46,6 @@ Errores: N/A*/
         btn_iniciar.show(false);
         jc_diagnostic.show(false);
         jmi_CreateRute.show(false);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -981,34 +980,34 @@ Retorna:N/A
 Errores: N/A*/
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         jp_show.removeAll();
-        starGraph();
-        display();
-        btn_iniciar.show();
-        jc_diagnostic.show();
-        jmi_CreateRute.show();
-        ArrayList<Node> closed = CrashGenerated(false);
-        String closed01 = "";
-        for (int i = 0; i < closed.size(); i++) {
-            closed01 += "<div style='text-align: center;'>" + closed.get(i).getId() + "<br></center></div>";
-        }
-        lbl_showNews.setText("");
-        try {
-            if (theradNews.isAlive() == true) {
-                String Datos = "<html><body> <center>" + closed01 + "<br></center></body></html>";
-                theradNews.SetMessage(Datos);
+        StartGraph();
+        if (graph == null) {
+        } else {
+            Display();
+            btn_iniciar.show();
+            jc_diagnostic.show();
+            jmi_CreateRute.show();
+            ArrayList<Node> closed = CrashGenerated(false);
+            String closedStreet = "";
+            for (int i = 0; i < closed.size(); i++) {
+                closedStreet += "<div style='text-align: center;'>" + closed.get(i).getId() + "<br></center></div>";
             }
-        } catch (Exception e) {
-            String Datos = "<html><body><center>" + closed01 + "<br></center></body></html>";
-            theradNews = new admNews(lbl_showNews, Datos, jp_showNews);
-            theradNews.start();
+            lbl_showNews.setText("");
+            try {
+                if (theradNews.isAlive() == true) {
+                    String Datos = "<html><body> <center>" + closedStreet + "<br></center></body></html>";
+                    theradNews.SetMessage(Datos);
+                }
+            } catch (Exception e) {
+                String Datos = "<html><body><center>" + closedStreet + "<br></center></body></html>";
+                theradNews = new admNews(lbl_showNews, Datos, jp_showNews);
+                theradNews.start();
+            }
         }
 
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    /* 
-Descripción: Evento click que ocultara el boton de incializar el recorrido
-Params: N/A
-Retorna: N/A
-Errores: N/A*/
+
     private void btn_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StartActionPerformed
 
     }//GEN-LAST:event_btn_StartActionPerformed
@@ -1140,13 +1139,17 @@ Descripción: Inicializara el grafico y lo cargara al sistema
 Params: N/A
 Retorna:N/A
 Errores: N/A*/
-    public void starGraph() {
-        graph = CreateGraph(ReadFile());
-        LoadCombo();
-        GenerateCrash();
-        SetDefault();
-        graph.addAttribute("ui.stylesheet", styleSheet);
-        jp_show.repaint();
+    public void StartGraph() {
+        File toCreate = ReadFile();
+        if (toCreate == null) {
+        } else {
+            graph = CreateGraph(toCreate);
+            LoadCombo();
+            GenerateCrash();
+            SetDefault();
+            graph.addAttribute("ui.stylesheet", styleSheet);
+            jp_show.repaint();
+        }
 
     }
 
@@ -1155,7 +1158,7 @@ Descripción: Cargara el grafo generado a un panel en el Jdialog principal.
 Params: N/A
 Retorna:N/A
 Errores: N/A*/
-    private void display() {
+    private void Display() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel(new GridLayout()) {
@@ -1179,15 +1182,26 @@ Errores: N/A*/
 Descripción: Creara un archivo del se leeran los datos del grafo
 Params: N/A
 Retorna: File file, sera el archivo que contiene los datos dle grafo
-Errores: N/A*/
+Errores: Si el tipo de archivo no es compatible con el sistema, entonces se emitira la alerta y retornaremos null*/
     public File ReadFile() {
-        JFileChooser fileChooseer = new JFileChooser();
-        FileFilter filter = new FileNameExtensionFilter("Archivos", "txt", "csv", "docx");
-        fileChooseer.addChoosableFileFilter(filter);
-        int op = fileChooseer.showOpenDialog(this.jd_Graph);
-        String extension = fileChooseer.getSelectedFile().getPath();
-        if (op == JFileChooser.APPROVE_OPTION) {
-            return fileChooseer.getSelectedFile();
+        try {
+            JFileChooser fileChooseer = new JFileChooser();
+            FileFilter filter = new FileNameExtensionFilter("Archivos", "txt", "csv");
+            fileChooseer.addChoosableFileFilter(filter);
+            int op = fileChooseer.showOpenDialog(this.jd_Graph);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                String path = fileChooseer.getSelectedFile().getPath();
+                String extension = path.substring(path.length() - 4, path.length());
+                if (extension.equals(".txt") || extension.equals(".csv")) {
+                    return fileChooseer.getSelectedFile();
+                } else {
+                    JOptionPane.showMessageDialog(null, "El Archivo no es reconocible por el sistema", "Archivo no valido.", JOptionPane.ERROR_MESSAGE);
+                    return null;
+                }
+            }
+            return null;
+        } catch (Exception e) {
+
         }
         return null;
     }
